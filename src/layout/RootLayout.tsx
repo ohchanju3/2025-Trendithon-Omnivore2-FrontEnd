@@ -1,5 +1,3 @@
-// import Footer from "@components/navigation/footer/Footer";
-// import Header from "@components/navigation/header/Header";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
@@ -14,9 +12,7 @@ const Wrapper = styled.div`
 const RootLayout = () => {
   return (
     <Wrapper>
-      {/* <Header /> */}
       <Outlet />
-      {/* <Footer /> */}
     </Wrapper>
   );
 };
