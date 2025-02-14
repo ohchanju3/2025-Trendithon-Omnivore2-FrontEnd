@@ -1,5 +1,12 @@
+import { CalendarForm } from '@components/calendar/Calendar';
+import * as S from './DailyCake.styled';
+
 const DailyCake = () => {
-  return <div>데일리 케이크 페이지 입니다.</div>;
+	return (
+		<S.StyledDailyCake>
+			<CalendarForm />
+		</S.StyledDailyCake>
+	);
 };
 
 export default DailyCake;
