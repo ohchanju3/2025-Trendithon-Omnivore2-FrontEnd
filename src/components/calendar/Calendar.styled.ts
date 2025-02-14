@@ -23,6 +23,21 @@ export const StyledCalendar = styled(Calendar)`
 		margin-bottom: 0.5rem;
 	}
 
+	.react-calendar__tile--now {
+		background: transparent !important;
+		color: inherit !important;
+	}
+
+	.react-calendar__tile--active {
+		background: transparent !important;
+		color: inherit !important;
+	}
+
+	.disable-current-day {
+		background: transparent !important;
+		color: inherit !important;
+	}
+
 	// 년, 월 스타일
 	.react-calendar__navigation__label {
 		white-space: pre-line;
