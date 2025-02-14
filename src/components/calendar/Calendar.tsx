@@ -28,7 +28,7 @@ export const CalendarForm = () => {
 						month: 'long',
 					})}`
 				}
-				formatShortWeekday={(locale, date) =>
+				formatShortWeekday={(_, date) =>
 					['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'][date.getDay()]
 				}
 				navigationLabel={({ date }) => (
