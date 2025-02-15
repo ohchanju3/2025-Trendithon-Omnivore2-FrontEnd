@@ -136,3 +136,53 @@ export const StyledCalendar = styled(Calendar)`
 		// margin: 0.4rem;
 	}
 `;
+
+export const ContentWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+
+export const DayWrapper = styled.div`
+	font-size: 1.6rem;
+	font-weight: bold;
+	margin-bottom: 1.4rem;
+`;
+
+export const TextArea = styled.div`
+	margin: 1rem;
+	padding: 1rem;
+	border-radius: 10px;
+	background-color: #f0ecf5;
+	width: 320px;
+	height: 326px;
+	overflow: auto;
+	position: relative;
+
+	&::before {
+		content: '';
+		background: url('images/cupCake/happy_cupcake.svg') no-repeat center;
+		background-size: contain;
+		opacity: 0.2;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+`;
+
+export const LikeButton = styled.button`
+	width: 320px;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	margin-left: 1rem;
+	margin-bottom: 1rem;
+	gap: 0.6rem;
+
+	& > span {
+		font-size: 1.2rem;
+	}
+`;
