@@ -9,7 +9,6 @@ export const StyledCalendar = styled(Calendar)`
 	max-width: 350px;
 	background: transparent;
 	border: none;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 	// 날짜 스타일
 	.react-calendar__tile {
@@ -64,6 +63,17 @@ export const StyledCalendar = styled(Calendar)`
 	.react-calendar__navigation {
 		background-color: transparent;
 		margin-bottom: 1.4rem;
+	}
+
+	// 네비게이션 버튼 클릭 시 outline 삭제
+	.react-calendar__navigation button {
+		background: transparent !important;
+		outline: none !important;
+	}
+
+	.react-calendar__navigation__label {
+		background: transparent !important;
+		outline: none !important;
 	}
 
 	// 네비게이션 버튼 스타일
@@ -134,6 +144,11 @@ export const StyledCalendar = styled(Calendar)`
 
 	.react-calendar__month-view__days__day {
 		// margin: 0.4rem;
+	}
+
+	// 날짜 요일 밑줄 삭제
+	.react-calendar__month-view__weekdays__weekday > abbr {
+		text-decoration: none;
 	}
 `;
 
