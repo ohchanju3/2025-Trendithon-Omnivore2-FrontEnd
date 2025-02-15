@@ -11,7 +11,7 @@ const DailyCake = () => {
 				<S.IsPublicButton>
 					<Button scheme="E2DAEB">
 						<img
-							src="public/images/publicPrivateBtn/isPublic.png"
+							src="images/publicPrivateBtn/isPublic.png"
 							alt="isPublicBtnIcon"
 						/>
 						<span>공개범위</span>
