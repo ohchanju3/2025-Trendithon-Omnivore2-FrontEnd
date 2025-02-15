@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./Intro.styled";
 import Button from "@components/button/Button";
+import ProgressBar from "@components/intro/ProgressBar";
 
 interface Question {
   question: string;
@@ -41,13 +42,9 @@ const Question: React.FC = () => {
   const handleAnswer = (answer: string) => {
     setSelectedAnswers((prev) => {
       const updatedAnswers = [...prev, answer];
-      if (updatedAnswers.length === questions.length) {
-        setSelectedAnswers(updatedAnswers);
-      } else {
-        setCurrentQuestion((prev) => Math.min(prev + 1, questions.length - 1));
-      }
       return updatedAnswers;
     });
+    setCurrentQuestion((prev) => Math.min(prev + 1, questions.length - 1));
   };
 
   useEffect(() => {
@@ -55,12 +52,13 @@ const Question: React.FC = () => {
       const resultPattern = selectedAnswers.join("-");
       navigate("/result", { state: { resultPattern } });
     }
-  }, [selectedAnswers, questions.length, navigate]);
+  }, [selectedAnswers, navigate]);
 
   const currentQuestionData = questions[currentQuestion];
 
   return (
     <S.QuestionWrapper>
+      <ProgressBar currentStep={currentQuestion + 1} totalSteps={3} />
       <S.QuestionText>{currentQuestionData?.question}</S.QuestionText>
       <S.QuestionBtn>
         {currentQuestionData?.answers.map((answer, index) => (
