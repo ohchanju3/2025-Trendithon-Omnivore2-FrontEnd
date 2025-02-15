@@ -28,6 +28,8 @@ export const ButtonWrapper = styled.button<ButtonWrapperProps>`
       fontColor: "color",
       shadow: "box-shadow",
       radius: "border-radius",
+      fontSize: "font-size",
+      lineHeight: "line-height",
     };
 
     return css`
