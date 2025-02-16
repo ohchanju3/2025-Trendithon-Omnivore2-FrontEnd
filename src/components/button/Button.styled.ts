@@ -24,11 +24,13 @@ export const ButtonWrapper = styled.button<ButtonWrapperProps>`
 	${({ $scheme, theme }) => {
 		if (!theme.scheme[$scheme]) return '';
 
-		const cssKeyMap: Record<string, string> = {
-			fontColor: 'color',
-			shadow: 'box-shadow',
-			radius: 'border-radius',
-		};
+    const cssKeyMap: Record<string, string> = {
+      fontColor: "color",
+      shadow: "box-shadow",
+      radius: "border-radius",
+      fontSize: "font-size",
+      lineHeight: "line-height",
+    };
 
 		return css`
 			${Object.entries(theme.scheme[$scheme])
