@@ -9,7 +9,6 @@ export const StyledCalendar = styled(Calendar)`
 	max-width: 350px;
 	background: transparent;
 	border: none;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 	// 날짜 스타일
 	.react-calendar__tile {
@@ -66,6 +65,17 @@ export const StyledCalendar = styled(Calendar)`
 		margin-bottom: 1.4rem;
 	}
 
+	// 네비게이션 버튼 클릭 시 outline 삭제
+	.react-calendar__navigation button {
+		background: transparent !important;
+		outline: none !important;
+	}
+
+	.react-calendar__navigation__label {
+		background: transparent !important;
+		outline: none !important;
+	}
+
 	// 네비게이션 버튼 스타일
 	.react-calendar__navigation__arrow {
 		color: white;
@@ -93,7 +103,6 @@ export const StyledCalendar = styled(Calendar)`
 		background-color: #d5d2d7;
 		border-radius: 15px;
 		padding: 0.6rem;
-		width: 350px;
 	}
 
 	// 요일 타이틀 스타일
@@ -134,5 +143,60 @@ export const StyledCalendar = styled(Calendar)`
 
 	.react-calendar__month-view__days__day {
 		// margin: 0.4rem;
+	}
+
+	// 날짜 요일 밑줄 삭제
+	.react-calendar__month-view__weekdays__weekday > abbr {
+		text-decoration: none;
+	}
+`;
+
+export const ContentWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+
+export const DayWrapper = styled.div`
+	font-size: 1.6rem;
+	font-weight: bold;
+	margin: 1.4rem;
+`;
+
+export const TextArea = styled.div`
+	margin: 1rem;
+	padding: 1rem;
+	border-radius: 10px;
+	background-color: #f0ecf5;
+	width: 320px;
+	height: 326px;
+	overflow: auto;
+	position: relative;
+
+	&::before {
+		content: '';
+		background: url('images/cupCake/happy_cupcake.svg') no-repeat center;
+		background-size: contain;
+		opacity: 0.2;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+`;
+
+export const LikeButton = styled.button`
+	width: 320px;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	margin-left: 1rem;
+	margin-bottom: 1rem;
+	gap: 0.6rem;
+
+	& > span {
+		font-size: 1.2rem;
 	}
 `;

@@ -33,3 +33,19 @@ export const AddButton = styled.button`
 	justify-content: center;
 	cursor: pointer;
 `;
+
+export const IsPublicButton = styled.button`
+	Button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	`;
+
+export const ShareButton = styled.button`
+	Button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	`;

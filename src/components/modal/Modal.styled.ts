@@ -13,9 +13,11 @@ export const ModalWrapper = styled.div`
 `;
 
 export const ModalContent = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	color: #000;
-	width: 350px;
-	height: 500px;
 	background-color: #e2daeb;
 	border-radius: 12px;
 `;

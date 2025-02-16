@@ -42,7 +42,22 @@ export const CalendarForm = () => {
 				)}
 			/>
 			<Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}>
-				<div>내용을 넣으시면 됩니다.</div>
+				<S.ContentWrapper>
+					<S.DayWrapper>
+						{selectedDate?.toLocaleString().split('. ').splice(0, 3).join('.')}
+					</S.DayWrapper>
+					<S.TextArea>
+						오늘 내 생일이다! 기분 짱!! 맛있는것도 많이 먹고 친구들이랑 놀았다.
+						귯귯~~ 오늘 내 생일이다! 기분 짱!! 맛있는것도 많이 먹고 친구들이랑
+						놀았다. 귯귯~~ 오늘 내 생일이다! 기분 짱!! 맛있는것도 많이 먹고
+						친구들이랑 놀았다. 귯귯~~ 오늘 내 생일이다! 기분 짱!! 맛있는것도
+						많이 먹고 친구들이랑 놀았다. 귯귯~~ 오늘 내 생일이다! 기분 짱!!
+					</S.TextArea>
+					<S.LikeButton>
+						<img src="/images/likeBtn/heart.png" alt="heart" />
+						<span>10</span>
+					</S.LikeButton>
+				</S.ContentWrapper>
 			</Modal>
 		</S.CalendarWrapper>
 	);
