@@ -103,7 +103,6 @@ export const StyledCalendar = styled(Calendar)`
 		background-color: #d5d2d7;
 		border-radius: 15px;
 		padding: 0.6rem;
-		width: 350px;
 	}
 
 	// 요일 타이틀 스타일
@@ -162,7 +161,7 @@ export const ContentWrapper = styled.div`
 export const DayWrapper = styled.div`
 	font-size: 1.6rem;
 	font-weight: bold;
-	margin-bottom: 1.4rem;
+	margin: 1.4rem;
 `;
 
 export const TextArea = styled.div`
