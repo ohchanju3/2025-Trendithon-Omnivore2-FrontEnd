@@ -24,6 +24,14 @@ const theme = {
       height: "40px",
       radius: "15px",
     },
+    F0ECF5: {
+      background: "#F0ECF5",
+      fontColor: "#000000",
+      radius: "20px",
+      padding: "1rem 2rem",
+      fontSize: "18px",
+      lineHeight: "30px",
+    },
   },
 };
 

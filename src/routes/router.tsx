@@ -9,6 +9,9 @@ import Login from "@pages/login/Login";
 import DigitalCake from "@pages/digitalCake/DigitalCake";
 import DailyCake from "@pages/dailyCake/DailyCake";
 import Mypage from "@pages/mypage/Mypage";
+import Intro from "@pages/intro/Intro";
+import Question from "@pages/intro/Question";
+import Result from "@pages/intro/Result";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +21,18 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "intro",
+        element: <Intro />,
+      },
+      {
+        path: "question",
+        element: <Question />,
+      },
+      {
+        path: "result",
+        element: <Result />,
       },
       {
         element: <DefalutLayout />,
