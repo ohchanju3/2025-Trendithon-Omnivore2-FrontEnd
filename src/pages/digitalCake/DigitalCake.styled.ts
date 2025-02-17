@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const DailyCakeWrapper = styled.div`
+export const DigitalCakeWrapper = styled.div`
   position: fixed;
   top: 60px;
   left: 0;
@@ -11,13 +11,13 @@ export const DailyCakeWrapper = styled.div`
   align-items: center;
 `;
 
-export const DailyCakeContainer = styled.section`
+export const DigitalCakeContainer = styled.section`
   position: relative;
   width: 300px;
   height: auto;
 `;
 
-export const DailyCakeImg = styled.img`
+export const DigitalCakeImg = styled.img`
   width: 100%;
   height: auto;
 `;

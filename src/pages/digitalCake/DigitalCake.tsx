@@ -33,10 +33,10 @@ const DigitalCake = () => {
   };
 
   return (
-    <S.DailyCakeWrapper>
-      <S.DailyCakeContainer>
+    <S.DigitalCakeWrapper>
+      <S.DigitalCakeContainer>
         {/* TODO: 백엔드 응답 response data 확인 후 이미지 연결되도록 수정 필요 */}
-        <S.DailyCakeImg src="/images/intro/cream-cake.png" />
+        <S.DigitalCakeImg src="/images/intro/cream-cake.png" />
         {candlePositions.map((pos, index) => (
           <S.CandleContainer
             key={index}
@@ -65,8 +65,8 @@ const DigitalCake = () => {
         {modalOpen !== null && (
           <Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} />
         )}
-      </S.DailyCakeContainer>
-    </S.DailyCakeWrapper>
+      </S.DigitalCakeContainer>
+    </S.DigitalCakeWrapper>
   );
 };
 
