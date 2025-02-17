@@ -37,7 +37,7 @@ const DailyCake = () => {
 				</S.AddButton>
 				<S.ShareButton>
 					<Button scheme="E2DAEB">
-						<img src="public/images/shareBtn/Send.png" alt="shareBtnIcon" />
+						<img src="images/shareBtn/Send.png" alt="shareBtnIcon" />
 						<span>공유</span>
 					</Button>
 				</S.ShareButton>
