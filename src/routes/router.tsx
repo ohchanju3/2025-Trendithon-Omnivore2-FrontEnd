@@ -9,6 +9,7 @@ import Login from "@pages/login/Login";
 import DigitalCake from "@pages/digitalCake/DigitalCake";
 import DailyCake from "@pages/dailyCake/DailyCake";
 import Mypage from "@pages/mypage/Mypage";
+import OAuthRedirectHandler from "@pages/login/OAuthRedirectHandler";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "/api/oauth2/callback/:provider",
+        element: <OAuthRedirectHandler />,
       },
       {
         element: <DefalutLayout />,
