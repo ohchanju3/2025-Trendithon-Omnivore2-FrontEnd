@@ -12,16 +12,33 @@ const DailyCake = () => {
 	const [privacyMode, setPrivacyMode] = useState(options[0]);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
+	const handleShare = async () => {
+		const shareData = {
+			title: 'Daily Cake 공유',
+			text: '내 감정을 공유해요! 🧁',
+			url: window.location.href,
+		};
+
+		try {
+			if (navigator.share) {
+				await navigator.share(shareData);
+				console.log('✅ 공유 성공');
+			} else {
+				alert('현재 브라우저는 공유 기능을 지원하지 않습니다.');
+			}
+		} catch (error) {
+			console.error('공유 오류:', error);
+		}
+	};
+
 	return (
 		<S.StyledDailyCake>
 			<CalendarForm />
 			<S.StyledButtons>
 				<S.IsPublicButton>
 					<DropDownButton
-						onSelect={(select) => {
-							setPrivacyMode(select);
-						}}
-						selected={options[0]}
+						onSelect={(select) => setPrivacyMode(select)}
+						selected={privacyMode}
 						options={options}
 						scheme="E2DAEB"
 					>
@@ -36,7 +53,7 @@ const DailyCake = () => {
 					<AddIcon />
 				</S.AddButton>
 				<S.ShareButton>
-					<Button scheme="E2DAEB">
+					<Button scheme="E2DAEB" onClick={handleShare}>
 						<img src="images/shareBtn/Send.png" alt="shareBtnIcon" />
 						<span>공유</span>
 					</Button>
