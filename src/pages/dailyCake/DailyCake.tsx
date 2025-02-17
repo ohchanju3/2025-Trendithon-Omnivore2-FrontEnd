@@ -4,10 +4,13 @@ import Button from '@components/button/Button';
 import AddIcon from '@mui/icons-material/Add';
 import { DropDownButton } from '@components/button/DropDownButton';
 import { useState } from 'react';
+import { Modal } from '@components/modal/Modal';
+import { CreateDailyCake } from '@components/modal/createDailyCake/CreateDailyCake';
 
 const DailyCake = () => {
 	const options = ['전체공개', '친구공개', '비공개'];
 	const [privacyMode, setPrivacyMode] = useState(options[0]);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	return (
 		<S.StyledDailyCake>
@@ -29,7 +32,7 @@ const DailyCake = () => {
 						<span>{privacyMode}</span>
 					</DropDownButton>
 				</S.IsPublicButton>
-				<S.AddButton>
+				<S.AddButton onClick={() => setIsModalOpen(!isModalOpen)}>
 					<AddIcon />
 				</S.AddButton>
 				<S.ShareButton>
@@ -39,6 +42,13 @@ const DailyCake = () => {
 					</Button>
 				</S.ShareButton>
 			</S.StyledButtons>
+			<Modal
+				isOpen={isModalOpen}
+				onClose={() => setIsModalOpen(false)}
+				buttonTitle="저장"
+			>
+				<CreateDailyCake />
+			</Modal>
 		</S.StyledDailyCake>
 	);
 };
