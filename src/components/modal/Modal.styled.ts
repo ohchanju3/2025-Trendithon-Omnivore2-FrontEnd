@@ -21,6 +21,7 @@ export const ModalContent = styled.div`
 	color: #000;
 	background-color: #e2daeb;
 	border-radius: 12px;
+	padding-bottom: 2rem;
 `;
 
 export const ExitButton = styled.button`
@@ -32,4 +33,10 @@ export const ExitButton = styled.button`
 	align-items: flex-end;
 	background-color: transparent;
 	cursor: pointer;
+`;
+
+export const SubmitButton = styled.div`
+	Button {
+		font-weight: bold;
+	}
 `;
