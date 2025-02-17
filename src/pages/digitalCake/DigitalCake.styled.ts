@@ -7,8 +7,10 @@ export const DigitalCakeWrapper = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 `;
 
 export const DigitalCakeContainer = styled.section`
@@ -52,4 +54,9 @@ export const UploadedImg = styled.img`
   border-radius: 50%;
   object-fit: cover;
   z-index: 5;
+`;
+
+export const DigitalCakeBtnContainer = styled.div`
+  display: flex;
+  gap: 3rem;
 `;

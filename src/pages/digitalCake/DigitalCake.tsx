@@ -1,6 +1,7 @@
 import { Modal } from "@components/modal/Modal";
 import * as S from "./DigitalCake.styled";
 import { useState } from "react";
+import Button from "@components/button/Button";
 
 // 초와 동그라미의 위치 설정
 const candlePositions = [0, 30, 45, 60, 60]; // 초의 왼쪽 위치
@@ -27,9 +28,14 @@ const circleBodies = [
 const DigitalCake = () => {
   const [modalOpen, setModalOpen] = useState<number | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [liked, setLiked] = useState(false); // 좋아요 상태 관리
 
   const handleCircleClick = (index: number) => {
     setModalOpen(index);
+  };
+
+  const toggleLike = () => {
+    setLiked(!liked); // 하트 클릭 시 like 상태 토글
   };
 
   return (
@@ -66,6 +72,23 @@ const DigitalCake = () => {
           <Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} />
         )}
       </S.DigitalCakeContainer>
+      {/* TODO: api 연동시 좋아요 버튼 상태 필요 */}
+      <S.DigitalCakeBtnContainer>
+        <Button scheme="E2DAEB" onClick={toggleLike}>
+          <img
+            src={
+              liked
+                ? "/images/shareBtn/likeBtn.png"
+                : "/images/shareBtn/unlikeBtn.png"
+            }
+          />
+          <span>13</span>
+        </Button>
+        <Button scheme="E2DAEB">
+          <img src="public/images/shareBtn/Send.png" alt="shareBtnIcon" />
+          <span>공유</span>
+        </Button>
+      </S.DigitalCakeBtnContainer>
     </S.DigitalCakeWrapper>
   );
 };
