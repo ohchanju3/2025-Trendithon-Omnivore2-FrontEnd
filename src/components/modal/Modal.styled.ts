@@ -22,6 +22,8 @@ export const ModalContent = styled.div`
   background-color: #e2daeb;
   border-radius: 12px;
   padding-bottom: 2rem;
+  margin: 15px;
+  max-width: 350px;
 `;
 
 export const ExitButton = styled.button`

@@ -35,7 +35,7 @@ const DigitalCakeModal = ({ isOpen, onClose }: DigitalCakeModalProps) => {
             onClick={() => document.getElementById("imageUpload")?.click()}
             style={{
               borderRadius: isImageSelected ? "50%" : "",
-              width: isImageSelected ? "150px" : "25%",
+              width: isImageSelected ? "150px" : "40%",
               height: isImageSelected ? "150px" : "",
             }}
           />

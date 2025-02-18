@@ -12,7 +12,7 @@ export const DigitalModalImgContainer = styled.div`
   justify-content: center;
 
   img {
-    cursor: "pointer";
+    cursor: pointer;
     object-fit: cover;
   }
 `;
