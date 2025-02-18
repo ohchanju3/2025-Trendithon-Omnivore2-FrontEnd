@@ -1,2 +1,17 @@
-// Todo: 로그인 안 한 유저의 경로 관리를 따로 해줘야 함
-// Todo: 로그인 상태 관리 필요할 듯
+import useAuth from "@hooks/useAuth";
+
+import { Navigate, Outlet } from "react-router-dom";
+
+const ProtectedRoute = () => {
+  const { isLogin } = useAuth();
+
+  if (!isLogin) {
+    // 로그인한 유저가 아닐경우 로그인 페이지로 돌아감
+    alert("로그인이 필요해요!");
+    return <Navigate to="/login" replace={true} />;
+  }
+
+  return <Outlet />;
+};
+
+export default ProtectedRoute;

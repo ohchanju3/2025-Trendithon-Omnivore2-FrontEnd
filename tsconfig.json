@@ -6,7 +6,9 @@
       "@styles/*": ["src/styles/*"],
       "@routes/*": ["src/routes/*"],
       "@layout/*": ["src/layout/*"],
-      "@pages/*": ["src/pages/*"]
+      "@pages/*": ["src/pages/*"],
+      "@atoms/*": ["src/atoms/*"],
+      "@hooks/*": ["src/hooks/*"]
     },
 
     "target": "ES2020",
