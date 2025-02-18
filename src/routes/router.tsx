@@ -26,6 +26,7 @@ const router = createBrowserRouter([
       {
         path: "/api/oauth2/callback/:provider",
         element: <OAuthRedirectHandler />,
+      },
       {
         path: "intro",
         element: <Intro />,
