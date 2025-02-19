@@ -1,9 +1,9 @@
 import { InputBar } from '@components/inputBar/InputBar.tsx';
 import * as S from './Mypage.styled.ts';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@components/button/Button.tsx';
 import { GoDetailBar } from '@components/goDetailBar/GoDetailBar.tsx';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Mypage = () => {
 	const navigate = useNavigate();
@@ -11,6 +11,14 @@ const Mypage = () => {
 	const [nickname, setNickName] = useState('');
 	const [email, setEmail] = useState('');
 	const [numOfFriends, setNumOfFriends] = useState(0);
+
+	useEffect(() => {
+		setNickName('minwoo');
+		setEmail('minwoo1119@naver.com');
+		setImageUrl('');
+		setNumOfFriends(12);
+	}, []);
+
 	return (
 		<S.MyPageWrapper>
 			<S.ProfileImage>
@@ -23,13 +31,12 @@ const Mypage = () => {
 				<S.FormAndBtn>
 					<InputBar
 						title="닉네임"
-						width="200px"
+						width="210px"
 						value={nickname}
-						isEditable={true}
 						onChange={setNickName}
 					></InputBar>
 					<Button
-						width="90px"
+						width="80px"
 						scheme="C3B0D7"
 						onClick={() => alert(`nickname:${nickname}, email:${email}`)}
 					>
@@ -41,7 +48,6 @@ const Mypage = () => {
 					title="이메일"
 					width="300px"
 					value={email}
-					isEditable={true}
 					onChange={setEmail}
 				></InputBar>
 				<GoDetailBar
