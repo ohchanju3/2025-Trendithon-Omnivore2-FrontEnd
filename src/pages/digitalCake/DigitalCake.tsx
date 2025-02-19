@@ -1,7 +1,7 @@
-import { Modal } from "@components/modal/Modal";
 import * as S from "./DigitalCake.styled";
 import { useState } from "react";
 import Button from "@components/button/Button";
+import DigitalCakeModal from "@components/digitalCake/digitalCakeModal";
 
 // 초와 동그라미의 위치 설정
 const candlePositions = [0, 30, 45, 60, 60]; // 초의 왼쪽 위치
@@ -26,16 +26,17 @@ const circleBodies = [
 ];
 
 const DigitalCake = () => {
-  const [modalOpen, setModalOpen] = useState<number | null>(null);
+  const [modalOpen, setModalOpen] = useState<number | null>();
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [liked, setLiked] = useState(false); // 좋아요 상태 관리
+  const [liked, setLiked] = useState(false);
 
   const handleCircleClick = (index: number) => {
     setModalOpen(index);
+    setModalIsOpen(true);
   };
 
   const toggleLike = () => {
-    setLiked(!liked); // 하트 클릭 시 like 상태 토글
+    setLiked(!liked);
   };
 
   return (
@@ -69,7 +70,10 @@ const DigitalCake = () => {
 
         {/* 모달 */}
         {modalOpen !== null && (
-          <Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} />
+          <DigitalCakeModal
+            isOpen={modalIsOpen}
+            onClose={() => setModalIsOpen(false)}
+          />
         )}
       </S.DigitalCakeContainer>
       {/* TODO: api 연동시 좋아요 버튼 상태 필요 */}
