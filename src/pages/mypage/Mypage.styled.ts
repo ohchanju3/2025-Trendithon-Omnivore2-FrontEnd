@@ -45,8 +45,4 @@ export const FormAndBtn = styled.div`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-
-	Button {
-		margin: 2px;
-	}
 `;
