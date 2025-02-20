@@ -11,8 +11,8 @@ export const GoDetailBar = ({ text, width, onClick }: GoDetailBarProps) => {
 	return (
 		<S.GoDetailBarWrapper width={width} onClick={() => onClick()}>
 			<S.TextWrapper>
-				{text.map((t) => (
-					<span>{t}</span>
+				{text.map((t, index) => (
+					<span key={index}>{t}</span>
 				))}
 			</S.TextWrapper>
 			<S.ButtonIconBox>
