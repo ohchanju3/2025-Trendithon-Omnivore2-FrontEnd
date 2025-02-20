@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 export const DigitalCakeWrapper = styled.div`
-  position: fixed;
-  top: 60px;
+  position: absolute;
+  top: 165px;
   left: 0;
-  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;

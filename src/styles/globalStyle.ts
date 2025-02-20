@@ -20,7 +20,6 @@ i {font-style:normal}
 #root {
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
 
 	min-height: 100vh;
 	
