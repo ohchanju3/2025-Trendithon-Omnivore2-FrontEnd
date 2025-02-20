@@ -2,7 +2,11 @@ import Button from "@components/button/Button.tsx";
 import { FriendsBar } from "../friendsBar/FriendsBar.tsx";
 import * as S from "./FriendsManageForm.styled.ts";
 
-export const FriendsManageForm = () => {
+type FriendsManageFormProps = {
+	numOfFriends: number;
+};
+
+export const FriendsManageForm = ({ numOfFriends }: FriendsManageFormProps) => {
 	{
 		/* 임시 데이터 */
 	}
@@ -36,7 +40,7 @@ export const FriendsManageForm = () => {
 	return (
 		<S.FriendsManageFormWrapper>
 			<S.TitleText>
-				<span>친구 관리 (14)</span>
+				<span>친구 관리 ({numOfFriends})</span>
 			</S.TitleText>
 			<S.SearchAndAddWrapper>
 				<S.SearchTab>

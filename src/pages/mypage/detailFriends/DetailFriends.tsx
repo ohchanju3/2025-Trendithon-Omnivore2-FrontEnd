@@ -15,7 +15,7 @@ export const DetailFriends = () => {
 				}}
 				text={["친구 요청"]}
 			/>
-			<FriendsManageForm />
+			<FriendsManageForm numOfFriends={12} />
 		</S.DetailFriendsWrapper>
 	);
 };
