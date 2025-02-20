@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const InputBarWrapper = styled.div<{ width: string }>`
 	padding: 0.4rem 0.6rem;
@@ -20,5 +20,11 @@ export const InputBarWrapper = styled.div<{ width: string }>`
 
 	input {
 		background: transparent;
+		width: ${({ width }) => `${parseInt(width, 10) / 2}px`};
+		text-overflow: clip;
 	}
+`;
+
+export const TextWrapper = styled.span`
+	margin: 0.6rem;
 `;
