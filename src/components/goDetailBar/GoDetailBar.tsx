@@ -1,7 +1,8 @@
 import * as S from "./GoDetailBar.styled.ts";
 
 type GoDetailBarProps = {
-	text: string;
+	text: string[];
+	separator?: string;
 	width: string;
 	onClick: () => void;
 };
@@ -9,10 +10,14 @@ type GoDetailBarProps = {
 export const GoDetailBar = ({ text, width, onClick }: GoDetailBarProps) => {
 	return (
 		<S.GoDetailBarWrapper width={width} onClick={() => onClick()}>
-			<S.TextWrapper>{text}</S.TextWrapper>
+			<S.TextWrapper>
+				{text.map((t) => (
+					<span>{t}</span>
+				))}
+			</S.TextWrapper>
 			<S.ButtonIconBox>
-				<img src="images/goDetailBar/pink_dot.png" />
-				<img src="images/goDetailBar/right_arrow.png" />
+				<img src="images/goDetailBar/pink_dot.svg" />
+				<img src="images/goDetailBar/right_arrow.svg" />
 			</S.ButtonIconBox>
 		</S.GoDetailBarWrapper>
 	);
