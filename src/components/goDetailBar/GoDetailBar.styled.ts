@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const GoDetailBarWrapper = styled.div<{ width: string }>`
 	padding: 0.4rem 0.6rem;
@@ -26,4 +26,9 @@ export const ButtonIconBox = styled.div`
 	align-items: center;
 	margin: 1rem;
 	gap: 0.5rem;
+`;
+
+export const TextWrapper = styled.span`
+	margin: 0.6rem;
+	padding: 0.4rem 0.6rem;
 `;
