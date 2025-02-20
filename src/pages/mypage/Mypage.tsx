@@ -22,7 +22,7 @@ const Mypage = () => {
 	return (
 		<S.MyPageWrapper>
 			<S.ProfileImage>
-				<S.ImageBox imageUrl={imageUrl}></S.ImageBox>
+				<S.ImageBox $imageUrl={imageUrl}></S.ImageBox>
 				<S.ChangeImageBtn onClick={() => alert("이미지 변경 기능 넣어야함!")}>
 					프로필 이미지 변경
 				</S.ChangeImageBtn>

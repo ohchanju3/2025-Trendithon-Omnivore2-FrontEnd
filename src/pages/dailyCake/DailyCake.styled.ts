@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StyledDailyCake = styled.div`
 	margin-top: 2rem;
@@ -9,7 +9,7 @@ export const StyledDailyCake = styled.div`
 	color: white;
 `;
 
-export const StyledButtons = styled.button`
+export const StyledButtons = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -23,7 +23,7 @@ export const StyledButtons = styled.button`
 	}
 `;
 
-export const AddButton = styled.button`
+export const AddButton = styled.div`
 	background-color: #4e4376;
 	padding: 0.5rem;
 	border-radius: 50%;
@@ -34,7 +34,7 @@ export const AddButton = styled.button`
 	cursor: pointer;
 `;
 
-export const IsPublicButton = styled.button`
+export const IsPublicButton = styled.div`
 	Button {
 	display: flex;
 	align-items: center;
@@ -42,7 +42,7 @@ export const IsPublicButton = styled.button`
 	gap: 0.5rem;
 	`;
 
-export const ShareButton = styled.button`
+export const ShareButton = styled.div`
 	Button {
 	display: flex;
 	align-items: center;

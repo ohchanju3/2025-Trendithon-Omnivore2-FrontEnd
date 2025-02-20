@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const DropDownButtonWrapper = styled.div`
 	position: relative;
@@ -11,6 +11,11 @@ export const DropDownList = styled.div`
 	top: 100%;
 	left: 0;
 	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
 	background-color: #e2daeb;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	border-radius: 12px;

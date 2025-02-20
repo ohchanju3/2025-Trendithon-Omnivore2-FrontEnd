@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const MyPageWrapper = styled.div`
 	height: 90vh;
@@ -18,13 +18,13 @@ export const ProfileImage = styled.div`
 	margin-bottom: 2rem;
 `;
 
-export const ImageBox = styled.div<{ imageUrl?: string }>`
+export const ImageBox = styled.div<{ $imageUrl?: string }>`
 	width: 100px;
 	height: 100px;
 	border-radius: 50%;
 	background-color: #f0ecf5;
-	background-image: ${({ imageUrl }) =>
-		imageUrl ? `url(${imageUrl})` : 'none'};
+	background-image: ${({ $imageUrl }) =>
+		$imageUrl ? `url(${$imageUrl})` : "none"};
 	background-size: cover;
 	background-position: center;
 `;
