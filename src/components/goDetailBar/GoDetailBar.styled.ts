@@ -29,6 +29,17 @@ export const ButtonIconBox = styled.div`
 `;
 
 export const TextWrapper = styled.span`
+	display: flex;
+	flex-direction: row;
+	gap: 0.3rem;
 	margin: 0.6rem;
 	padding: 0.4rem 0.6rem;
+
+	span:last-child {
+		font-weight: 400;
+	}
+
+	span:first-child {
+		font-weight: bold;
+	}
 `;

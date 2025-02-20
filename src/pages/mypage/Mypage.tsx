@@ -1,21 +1,21 @@
-import { InputBar } from '@components/inputBar/InputBar.tsx';
-import * as S from './Mypage.styled.ts';
-import { useEffect, useState } from 'react';
-import Button from '@components/button/Button.tsx';
-import { GoDetailBar } from '@components/goDetailBar/GoDetailBar.tsx';
-import { useNavigate } from 'react-router-dom';
+import { InputBar } from "@components/inputBar/InputBar.tsx";
+import * as S from "./Mypage.styled.ts";
+import { useEffect, useState } from "react";
+import Button from "@components/button/Button.tsx";
+import { GoDetailBar } from "@components/goDetailBar/GoDetailBar.tsx";
+import { useNavigate } from "react-router-dom";
 
 const Mypage = () => {
 	const navigate = useNavigate();
-	const [imageUrl, setImageUrl] = useState('');
-	const [nickname, setNickName] = useState('');
-	const [email, setEmail] = useState('');
+	const [imageUrl, setImageUrl] = useState("");
+	const [nickname, setNickName] = useState("");
+	const [email, setEmail] = useState("");
 	const [numOfFriends, setNumOfFriends] = useState(0);
 
 	useEffect(() => {
-		setNickName('minwoo');
-		setEmail('minwoo1119@naver.com');
-		setImageUrl('');
+		setNickName("minwoo");
+		setEmail("minwoo1119@naver.com");
+		setImageUrl("");
 		setNumOfFriends(12);
 	}, []);
 
@@ -23,7 +23,7 @@ const Mypage = () => {
 		<S.MyPageWrapper>
 			<S.ProfileImage>
 				<S.ImageBox imageUrl={imageUrl}></S.ImageBox>
-				<S.ChangeImageBtn onClick={() => alert('이미지 변경 기능 넣어야함!')}>
+				<S.ChangeImageBtn onClick={() => alert("이미지 변경 기능 넣어야함!")}>
 					프로필 이미지 변경
 				</S.ChangeImageBtn>
 			</S.ProfileImage>
@@ -52,9 +52,9 @@ const Mypage = () => {
 				></InputBar>
 				<GoDetailBar
 					width="300px"
-					text={'친구 관리 | ' + numOfFriends + '명'}
+					text={["친구 관리", "|", numOfFriends.toString() + "명"]}
 					onClick={() => {
-						navigate('/managementFriends');
+						navigate("/detailfriends");
 					}}
 				></GoDetailBar>
 			</S.InfoForm>

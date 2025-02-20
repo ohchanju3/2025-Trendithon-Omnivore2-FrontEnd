@@ -1,5 +1,5 @@
-import { ChangeEvent, ReactNode } from 'react';
-import * as S from './InputBar.styled.ts';
+import { ChangeEvent, ReactNode } from "react";
+import * as S from "./InputBar.styled.ts";
 
 type InputBarProps = {
 	value: string;
@@ -22,14 +22,14 @@ export const InputBar = ({
 
 	return (
 		<S.InputBarWrapper width={width}>
-			<span>{title}</span>
+			<S.TextWrapper>{title}</S.TextWrapper>
 			<span> | </span>
 
 			<input
 				type="text"
 				name="inputbox"
 				id="inputbox"
-				value={value} // ✅ 직접 바인딩하여 부모 값과 동기화
+				value={value}
 				onChange={handleChange}
 			/>
 
