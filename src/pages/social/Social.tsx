@@ -72,7 +72,7 @@ export const Social = () => {
 			</S.SelectTap>
 			<S.Content>
 				{selectedTap === val1 ? (
-					<div>
+					<S.CakeWrapper>
 						{socailCakeData.map((data, index) => (
 							<SocialCake
 								key={index}
@@ -81,9 +81,9 @@ export const Social = () => {
 								owner={data.owner}
 							/>
 						))}
-					</div>
+					</S.CakeWrapper>
 				) : (
-					<div>
+					<S.CupCakeWrapper>
 						{socialCupcakeData.map((data, index) => (
 							<SocialCupcake
 								key={index}
@@ -94,7 +94,7 @@ export const Social = () => {
 								writtenDate={data.writtenDate}
 							></SocialCupcake>
 						))}
-					</div>
+					</S.CupCakeWrapper>
 				)}
 			</S.Content>
 		</S.SocialWrapper>

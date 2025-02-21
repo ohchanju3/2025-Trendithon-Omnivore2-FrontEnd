@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const SocialCakeWrapper = styled.div`
+	width: 300px;
 	margin: 2rem;
 	padding-bottom: 2rem;
 	border-bottom: 4px dotted white;
@@ -22,7 +23,7 @@ export const CakeInfo = styled.div`
 `;
 
 export const CakeWrapper = styled.img`
-	width: 370px;
+	width: 100%;
 `;
 
 export const LikedText = styled.div`
