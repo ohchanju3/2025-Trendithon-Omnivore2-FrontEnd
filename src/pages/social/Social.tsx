@@ -2,7 +2,7 @@ import { SelectTap } from "@components/selectTap/SelectTap.tsx";
 import * as S from "./Social.styled.ts";
 import { useEffect, useState } from "react";
 import { SocialCupcake } from "@components/social/socialCupcake/SocialCupcake.tsx";
-import { SocialCake } from "@components/social/socialCake/socialCake.tsx";
+import { SocialCake } from "@components/social/socialCake/SocialCake.tsx";
 
 const socailCakeData = [
 	{
