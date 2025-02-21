@@ -17,8 +17,8 @@ export const InfoBox = styled.div`
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
-	color: black;
-	font-size: 1.4rem;
+	color: #313131;
+	font-size: 1rem;
 `;
 
 export const CupCakeImg = styled.img`
