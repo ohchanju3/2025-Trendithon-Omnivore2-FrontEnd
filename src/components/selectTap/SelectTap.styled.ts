@@ -6,7 +6,7 @@ export const SelectTapWrapper = styled.div`
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	gap: 1rem;
+	gap: 3rem;
 `;
 
 export const TextWrapper = styled.div<{ isSelected: boolean }>`
