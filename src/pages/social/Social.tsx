@@ -2,6 +2,25 @@ import { SelectTap } from "@components/selectTap/SelectTap.tsx";
 import * as S from "./Social.styled.ts";
 import { useEffect, useState } from "react";
 import { SocialCupcake } from "@components/social/socialCupcake/SocialCupcake.tsx";
+import { SocialCake } from "@components/social/socialCake/socialCake.tsx";
+
+const socailCakeData = [
+	{
+		likeNum: 12,
+		owner: "jeongbami",
+		liked: true,
+	},
+	{
+		likeNum: 8,
+		owner: "alsn",
+		liked: false,
+	},
+	{
+		likeNum: 2,
+		owner: "gildong",
+		liked: true,
+	},
+];
 
 const socialCupcakeData = [
 	{
@@ -53,7 +72,16 @@ export const Social = () => {
 			</S.SelectTap>
 			<S.Content>
 				{selectedTap === val1 ? (
-					<div>cake페이지</div>
+					<div>
+						{socailCakeData.map((data, index) => (
+							<SocialCake
+								key={index}
+								liked={data.liked}
+								likedNum={data.likeNum}
+								owner={data.owner}
+							/>
+						))}
+					</div>
 				) : (
 					<div>
 						{socialCupcakeData.map((data, index) => (
