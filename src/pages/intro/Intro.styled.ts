@@ -5,7 +5,7 @@ export const IntroWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 100vh;
   gap: 2rem;
 `;
 
@@ -25,7 +25,7 @@ export const IntroText = styled.p`
 
 export const QuestionWrapper = styled.div`
   display: flex;
-  height: 100%;
+  height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -52,7 +52,7 @@ export const QuestionBtn = styled.section`
 
 export const ResultWrapper = styled.div`
   display: flex;
-  height: 100%;
+  height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;

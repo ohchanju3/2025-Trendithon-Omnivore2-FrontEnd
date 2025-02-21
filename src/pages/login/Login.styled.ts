@@ -4,7 +4,7 @@ export const LoginWrapper = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
-  height: 100%;
+  height: 100vh;
   align-items: center;
   line-height: 22px;
 `;
