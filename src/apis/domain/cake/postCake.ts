@@ -1,4 +1,4 @@
-import { postResponse } from "../instance";
+import { postResponse } from "@apis/instance";
 
 export const postCake = async (cakeName: string): Promise<number | null> => {
   const colorMapping: { [key: string]: string } = {
@@ -12,15 +12,16 @@ export const postCake = async (cakeName: string): Promise<number | null> => {
     "논리적인 초코": "CHOCOLATE",
   };
 
-  const color = colorMapping[cakeName] || "STRAWBERRY";
+  const color = colorMapping[cakeName] || "NOTHING";
 
-  const response = await postResponse<{ color: string }, { cakeId: number }>(
-    "/api/cakes",
-    { color }
-  );
-  if (response) {
-    localStorage.setItem("cakeId", response.cakeId.toString());
-    return response.cakeId;
+  const response = await postResponse<
+    { color: string },
+    { statusCode: number; message: string; data: { cakeId: number } }
+  >("/api/cakes", { color });
+
+  if (response && response.data && response.data.cakeId) {
+    localStorage.setItem("cakeId", response.data.cakeId.toString());
+    return response.data.cakeId;
   }
 
   return null;

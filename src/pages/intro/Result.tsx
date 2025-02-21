@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import * as S from "./Intro.styled";
-import { postCake } from "@apis/cake/postCake";
+import { postCake } from "@apis/domain/cake/postCake";
 
 interface LocationState {
   resultPattern: string;
@@ -46,19 +46,23 @@ const Result: React.FC = () => {
     image: "/images/intro/cream-cake.png",
   };
 
+  const [isRequestSent, setIsRequestSent] = useState(false);
+
   useEffect(() => {
-    const sendCakeData = async () => {
-      const cakeId = await postCake(cake.name);
+    if (!isRequestSent) {
+      const sendCakeData = async () => {
+        const cakeId = await postCake(cake.name);
 
-      if (cakeId !== null) {
-        console.log("케이크 아이디 저장!:", cakeId);
-      } else {
-        console.error("케이크 아이디 저장 실패");
-      }
-    };
+        if (cakeId !== null) {
+          setIsRequestSent(true);
+        } else {
+          console.log("케이크 id 저장 실패");
+        }
+      };
 
-    sendCakeData();
-  }, [cake.name]);
+      sendCakeData();
+    }
+  }, [cake.name, isRequestSent]);
 
   return (
     <S.ResultWrapper>
