@@ -15,6 +15,7 @@ import Question from "@pages/intro/Question";
 import Result from "@pages/intro/Result";
 import { FriendReqeust } from "@pages/mypage/friendRequest/FriendRequest";
 import { DetailFriends } from "@pages/mypage/detailFriends/DetailFriends";
+import { Social } from "@pages/social/Social";
 
 const router = createBrowserRouter([
 	{
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
 					{
 						path: "dailyCake",
 						element: <DailyCake />,
+					},
+					{
+						path: "social",
+						element: <Social />,
 					},
 				],
 			},
