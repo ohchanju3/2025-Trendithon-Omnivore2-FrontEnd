@@ -32,7 +32,6 @@ export const TextWrapper = styled.span`
 	display: flex;
 	flex-direction: row;
 	gap: 0.3rem;
-	margin: 0.6rem;
 	padding: 0.4rem 0.6rem;
 
 	span:last-child {
