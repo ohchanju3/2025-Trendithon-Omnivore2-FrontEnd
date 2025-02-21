@@ -22,7 +22,7 @@ export const TitleText = styled.div`
 	height: 40px;
 	display: flex;
 	align-items: center;
-	padding: 1rem 2rem;
+	padding: 1rem;
 	border-radius: 12px 12px 0 0;
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 	font-weight: bold;
