@@ -29,7 +29,7 @@ const OAuthRedirectHandler = () => {
       localStorage.setItem("accessToken", loginToken.accessToken);
       localStorage.setItem("refreshToken", loginToken.refreshToken);
 
-      navigate("/dailyCake");
+      navigate("/intro");
     }
   }, [loginToken, navigate]);
 
@@ -52,7 +52,7 @@ const OAuthRedirectHandler = () => {
         setLoginToken(tokenResponse.data.data);
       }
     } catch (error) {
-      console.error("❌ 토큰을 가져오는데 실패했습니다:", error);
+      console.error("토큰을 가져오는데 실패했습니다:", error);
     }
   };
   //Todo: 로딩 컴포넌트 생성
