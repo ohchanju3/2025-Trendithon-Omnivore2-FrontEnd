@@ -3,14 +3,17 @@ import * as S from "./DailyCake.styled";
 import Button from "@components/button/Button";
 import AddIcon from "@mui/icons-material/Add";
 import { DropDownButton } from "@components/button/DropDownButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "@components/modal/Modal";
 import { CreateDailyCake } from "@components/modal/createDailyCake/CreateDailyCake";
+import { getMyCupcakes } from "@apis/domain/cupcake/getMyCupcakes";
+import { CupCakeDTO } from "@apis/domain/cupcake/getMyCupcakes";
 
 const DailyCake = () => {
 	const options = ["전체공개", "친구공개", "비공개"];
 	const [privacyMode, setPrivacyMode] = useState(options[0]);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [cupcakes, setCupcakes] = useState<CupCakeDTO[] | null>(null);
 
 	const handleShare = async () => {
 		const shareData = {
@@ -22,7 +25,7 @@ const DailyCake = () => {
 		try {
 			if (navigator.share) {
 				await navigator.share(shareData);
-				console.log("✅ 공유 성공");
+				console.log("공유 성공");
 			} else {
 				alert("현재 브라우저는 공유 기능을 지원하지 않습니다.");
 			}
@@ -31,9 +34,20 @@ const DailyCake = () => {
 		}
 	};
 
+	useEffect(() => {
+		const fetchCupcakes = async () => {
+			const today = new Date();
+			const responce = await getMyCupcakes(today);
+			setCupcakes(responce);
+			console.log("responce", responce);
+		};
+
+		fetchCupcakes();
+	}, []);
+
 	return (
 		<S.StyledDailyCake>
-			<CalendarForm />
+			<CalendarForm cupcakes={cupcakes} />
 			<S.StyledButtons>
 				<S.IsPublicButton>
 					<DropDownButton
