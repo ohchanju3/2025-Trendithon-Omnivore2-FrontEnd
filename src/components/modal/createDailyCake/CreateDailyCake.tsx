@@ -4,14 +4,26 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Button from "@components/button/Button.tsx";
 import { postCupCake } from "@apis/domain/cupcake/postCupCake.ts";
 
-export const CreateDailyCake = () => {
+type CreateDailyCakeProps = {
+	privacyMode: string;
+};
+
+export const CreateDailyCake = ({ privacyMode }: CreateDailyCakeProps) => {
 	const emotions = ["happy", "so_so", "angry", "sad", "nervous"];
 	const date = new Date();
 	const [emoji, setEmoji] = useState(emotions[0]);
 	const [content, setContent] = useState("");
 
-	const makeCupcake = () => {
-		postCupCake(emoji, content, "PUBLIC");
+	const fetchMakeCupcake = async () => {
+		const response = await postCupCake(
+			emoji.toUpperCase(),
+			content,
+			privacyMode,
+		);
+		if (response) {
+			console.log("postCupCake API 요청 결과 : ", response);
+		}
+		console.log(response);
 	};
 
 	return (
@@ -35,7 +47,7 @@ export const CreateDailyCake = () => {
 				onChange={(e) => setContent(e.target.value)}
 			/>
 			<S.SubmitBtn>
-				<Button scheme="C3B0D7" onClick={makeCupcake}>
+				<Button scheme="C3B0D7" onClick={fetchMakeCupcake}>
 					저장
 				</Button>
 			</S.SubmitBtn>

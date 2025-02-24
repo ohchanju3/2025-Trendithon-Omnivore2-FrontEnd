@@ -29,10 +29,6 @@ export const ImageBox = styled.div<{ $imageUrl?: string }>`
 	background-position: center;
 `;
 
-export const ChangeImageBtn = styled.div`
-	text-decoration: underline;
-`;
-
 export const InfoForm = styled.div`
 	display: flex;
 	flex-direction: column;

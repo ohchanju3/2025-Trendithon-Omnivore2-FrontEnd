@@ -1,18 +1,27 @@
 import { postResponse } from "@apis/instance";
 
-type requestType = {
+type RequestType = {
 	emotion: string;
 	content: string;
 	accessRange: string;
+};
+
+type ResponseType = {
+	statusCode: number;
+	message: string;
+	data: {
+		cupCakeId: number;
+	};
 };
 
 export const postCupCake = async (
 	emotion: string,
 	content: string,
 	accessRange: string,
-): Promise<{ cupcakeId: number } | null> => {
-	console.log({ emotion: emotion, content: content, accessRange: accessRange });
-	const response = await postResponse<requestType, { cupcakeId: number }>(
+): Promise<number | null> => {
+	console.log({ emotion, content, accessRange });
+
+	const response = await postResponse<RequestType, ResponseType>(
 		"/api/cupcakes",
 		{
 			emotion: emotion,
@@ -21,8 +30,5 @@ export const postCupCake = async (
 		},
 	);
 
-	if (response) {
-		return response;
-	}
-	return null;
+	return response?.data.cupCakeId ?? null;
 };

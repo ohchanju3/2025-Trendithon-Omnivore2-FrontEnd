@@ -7,15 +7,31 @@ import { useEffect, useState } from "react";
 import { Modal } from "@components/modal/Modal";
 import { CreateDailyCake } from "@components/modal/createDailyCake/CreateDailyCake";
 import { updateAccess } from "@apis/domain/cupcake/updateAccess";
+import { getAccessRange } from "@apis/domain/cupcake/getAccessRange";
 
 const DailyCake = () => {
 	const options = ["전체공개", "친구공개", "비공개"];
-	const [privacyMode, setPrivacyMode] = useState(options[0]);
-	const [isModalOpen, setIsModalOpen] = useState(false);
 	const privacyMapping: Record<string, string> = {
 		전체공개: "PUBLIC",
 		친구공개: "FRIEND",
 		비공개: "PRIVATE",
+	};
+
+	const reversePrivacyMapping: Record<string, string> = Object.fromEntries(
+		Object.entries(privacyMapping).map(([key, value]) => [value, key]),
+	);
+
+	const [privacyMode, setPrivacyMode] = useState(options[0]);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const fetchAccessRange = async () => {
+		const response = await getAccessRange();
+		if (response && reversePrivacyMapping[response.access]) {
+			console.log("getAccessRange API 요청 결과 : ", response);
+			setPrivacyMode(reversePrivacyMapping[response.access]);
+		} else {
+			console.warn(`알 수 없는 access 값: ${response?.access}`);
+		}
 	};
 
 	const handleShare = async () => {
@@ -36,6 +52,10 @@ const DailyCake = () => {
 			console.error("공유 오류:", error);
 		}
 	};
+
+	useEffect(() => {
+		fetchAccessRange();
+	}, []);
 
 	useEffect(() => {
 		const mappedValue = privacyMapping[privacyMode];
@@ -75,7 +95,7 @@ const DailyCake = () => {
 				</S.ShareButton>
 			</S.StyledButtons>
 			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-				<CreateDailyCake />
+				<CreateDailyCake privacyMode={privacyMapping[privacyMode]} />
 			</Modal>
 		</S.StyledDailyCake>
 	);
