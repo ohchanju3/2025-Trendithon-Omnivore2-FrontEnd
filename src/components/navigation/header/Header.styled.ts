@@ -82,7 +82,8 @@ export const NavItem = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: white;
+    background-color: #f5e1c8;
+    color: #000000;
   }
 
   img {
