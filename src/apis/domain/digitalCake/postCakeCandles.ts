@@ -1,17 +1,16 @@
-// import { postResponse } from "@apis/instance";
+import { postNoResponse } from "@apis/instance";
 
-// export const postCakeCandles = async (cakeName: string): Promise<number | null> => {
-//   const color = colorMapping[cakeName] || "CREAM";
+export const postCakeCandles = async (formData: FormData): Promise<boolean> => {
+  try {
+    const result = await postNoResponse("/api/cakes/candles/create", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
-//   const response = await postResponse<
-//     { color: string },
-//     { statusCode: number; message: string; data: { cakeId: number } }
-//   >("/api/cakes", { color });
-
-//   if (response && response.data && response.data.cakeId) {
-//     localStorage.setItem("cakeId", response.data.cakeId.toString());
-//     return response.data.cakeId;
-//   }
-
-//   return null;
-// };
+    return result;
+  } catch (error) {
+    console.error("Error posting cake candles:", error);
+    return false;
+  }
+};

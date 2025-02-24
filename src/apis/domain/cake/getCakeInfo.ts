@@ -4,10 +4,12 @@ export interface CandleData {
   candleId: number;
   imgUrl: string;
   content: string;
+  candleIndex: number;
 }
 
 export interface CakeData {
   cakeId: number;
+  candleIndex: number;
   nickname: string;
   color: string;
   candles: CandleData[];

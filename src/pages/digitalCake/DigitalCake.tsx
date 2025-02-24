@@ -14,18 +14,19 @@ const DigitalCake = () => {
   const [isMatchedCandle, setIsMatchedCandle] = useState<boolean>(true);
 
   useEffect(() => {
-    const cakeId = Number(localStorage.getItem("cakeId"));
-    if (cakeId) {
-      getCakeInfo(cakeId).then((data) => {
-        if (data) setCakeData(data);
-      });
+    if (!modalIsOpen) {
+      const cakeId = Number(localStorage.getItem("cakeId"));
+      if (cakeId) {
+        getCakeInfo(cakeId).then((data) => {
+          if (data) setCakeData(data);
+        });
+      }
     }
-  }, []);
+  }, [modalIsOpen]);
 
   const handleCircleClick = (index: number) => {
     const matchedCandle = cakeData?.candles?.find(
-      //Todo: candleId 추후 백 수정 후 프 변경 필요 (아마 candleIndex로)
-      (candle) => candle.candleId === index
+      (candle) => candle.candleIndex === index
     );
     setIsMatchedCandle(!!matchedCandle);
     setModalOpen(index);
@@ -44,8 +45,7 @@ const DigitalCake = () => {
         {cakeData &&
           candleData.map((candle, index) => {
             const matchedCandle = cakeData.candles?.find(
-              //Todo: candleId 추후 백 수정 후 프 변경 필요 (아마 candleIndex로)
-              (candleItem) => candleItem.candleId === index
+              (candleItem) => candleItem.candleIndex === index
             );
 
             return (
@@ -60,6 +60,9 @@ const DigitalCake = () => {
                   onClick={() => handleCircleClick(index)}
                   src={matchedCandle?.imgUrl || candle.circleBody}
                   alt={`Circle ${index}`}
+                  style={{
+                    objectFit: "cover",
+                  }}
                 />
 
                 <S.CandleBody
@@ -80,12 +83,12 @@ const DigitalCake = () => {
                 onClose={() => setModalIsOpen(false)}
                 imgUrl={
                   cakeData.candles.find(
-                    (candle) => candle.candleId === modalOpen
+                    (candle) => candle.candleIndex === modalOpen
                   )?.imgUrl || ""
                 }
                 content={
                   cakeData.candles.find(
-                    (candle) => candle.candleId === modalOpen
+                    (candle) => candle.candleIndex === modalOpen
                   )?.content || ""
                 }
               />
@@ -93,6 +96,7 @@ const DigitalCake = () => {
               <DigitalCakeModalNoContent
                 isOpen={modalIsOpen}
                 onClose={() => setModalIsOpen(false)}
+                candleIndex={modalOpen}
               />
             )}
           </>

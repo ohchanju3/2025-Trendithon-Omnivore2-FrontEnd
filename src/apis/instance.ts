@@ -109,12 +109,26 @@ export const postResponse = async <TRequest, TResponse>(
 // POST 요청 (응답 데이터 없음)
 export const postNoResponse = async <TRequest>(
   url: string,
-  requestBody: TRequest
+  requestBody: TRequest,
+  config?: { headers?: { [key: string]: string } }
 ): Promise<boolean> => {
   try {
-    await instance.post(url, requestBody);
-    return true;
+    // FormData를 사용하면 Content-Type을 자동으로 설정하지 않아도 되지만,
+    // 명시적으로 multipart/form-data를 설정할 수 있습니다.
+    if (requestBody instanceof FormData) {
+      config = {
+        ...config,
+        headers: {
+          ...config?.headers,
+          "Content-Type": "multipart/form-data",
+        },
+      };
+    }
+
+    await instance.post(url, requestBody, config); // API 요청 전송
+    return true; // 성공적으로 처리됨
   } catch (error) {
-    return false;
+    console.error("Error posting request:", error);
+    return false; // 오류 발생 시 false 반환
   }
 };
