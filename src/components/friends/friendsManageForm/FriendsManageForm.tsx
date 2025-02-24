@@ -1,41 +1,34 @@
 import Button from "@components/button/Button.tsx";
 import { FriendsBar } from "../friendsBar/FriendsBar.tsx";
 import * as S from "./FriendsManageForm.styled.ts";
+import {
+	Follower,
+	getMyFollowers,
+} from "@apis/domain/mypage/getMyFollowers.ts";
+import { useEffect, useState } from "react";
 
 type FriendsManageFormProps = {
 	numOfFriends: number;
 };
 
 export const FriendsManageForm = ({ numOfFriends }: FriendsManageFormProps) => {
-	{
-		/* 임시 데이터 */
-	}
-	const data = [
-		{
-			profileImg: "",
-			name: "이민우",
-		},
-		{
-			profileImg: "",
-			name: "이민우",
-		},
-		{
-			profileImg: "",
-			name: "이민우",
-		},
-		{
-			profileImg: "",
-			name: "이민우",
-		},
-		{
-			profileImg: "",
-			name: "이민우",
-		},
-		{
-			profileImg: "",
-			name: "이민우",
-		},
-	];
+	const [data, setData] = useState<Follower[]>([]);
+
+	const fetchFriends = async () => {
+		console.log("fetchFriends 실행됨!"); // ✅ 이 로그가 찍히는지 확인
+		const response = await getMyFollowers();
+		console.log("getMyFollowers API 응답 데이터:", response);
+
+		if (response) {
+			setData(response);
+		} else {
+			console.warn("API 응답이 없습니다.");
+		}
+	};
+
+	useEffect(() => {
+		fetchFriends();
+	}, []);
 
 	return (
 		<S.FriendsManageFormWrapper>
@@ -59,7 +52,11 @@ export const FriendsManageForm = ({ numOfFriends }: FriendsManageFormProps) => {
 			</S.SearchAndAddWrapper>
 			<S.FriendsList $isScrollable={data.length > 3}>
 				{data.map((ele, index) => (
-					<FriendsBar key={index} profileImg={ele.profileImg} name={ele.name} />
+					<FriendsBar
+						key={index}
+						profileImg={ele.profileImage}
+						name={ele.name}
+					/>
 				))}
 			</S.FriendsList>
 		</S.FriendsManageFormWrapper>
