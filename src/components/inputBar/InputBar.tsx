@@ -5,7 +5,7 @@ type InputBarProps = {
 	value: string;
 	width: string;
 	title: string;
-	onChange: (newValue: string) => void;
+	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 	children?: ReactNode;
 };
 
@@ -16,10 +16,6 @@ export const InputBar = ({
 	onChange,
 	children,
 }: InputBarProps) => {
-	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-		onChange(event.target.value);
-	};
-
 	return (
 		<S.InputBarWrapper width={width}>
 			<S.TextWrapper>{title}</S.TextWrapper>
@@ -30,7 +26,7 @@ export const InputBar = ({
 				name="inputbox"
 				id="inputbox"
 				value={value}
-				onChange={handleChange}
+				onChange={onChange}
 			/>
 
 			{children}
