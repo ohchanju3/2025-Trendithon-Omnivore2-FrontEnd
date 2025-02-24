@@ -4,18 +4,23 @@ import * as S from "./digitalCakeModal.styled";
 interface DigitalCakeModalProps {
   isOpen: boolean;
   onClose: () => void;
+  imgUrl: string;
+  content: string;
 }
 
-const DigitalCakeModal = ({ isOpen, onClose }: DigitalCakeModalProps) => {
+const DigitalCakeModal = ({
+  isOpen,
+  onClose,
+  imgUrl,
+  content,
+}: DigitalCakeModalProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <S.DigitalModalWrapper>
         <S.DigitalModalContentImgContainer>
-          <img src="images/intro/cream-cake.png" />
+          <img src={imgUrl} />
         </S.DigitalModalContentImgContainer>
-        <S.DigitalModalContentTextarea>
-          와우와우와우
-        </S.DigitalModalContentTextarea>
+        <S.DigitalModalContentTextarea>{content}</S.DigitalModalContentTextarea>
       </S.DigitalModalWrapper>
     </Modal>
   );

@@ -72,12 +72,22 @@ const DigitalCake = () => {
           })}
 
         {/* 모달 */}
-        {modalOpen !== null && modalIsOpen && (
+        {modalOpen !== null && modalIsOpen && cakeData && (
           <>
             {isMatchedCandle ? (
               <DigitalCakeModal
                 isOpen={modalIsOpen}
                 onClose={() => setModalIsOpen(false)}
+                imgUrl={
+                  cakeData.candles.find(
+                    (candle) => candle.candleId === modalOpen
+                  )?.imgUrl || ""
+                }
+                content={
+                  cakeData.candles.find(
+                    (candle) => candle.candleId === modalOpen
+                  )?.content || ""
+                }
               />
             ) : (
               <DigitalCakeModalNoContent

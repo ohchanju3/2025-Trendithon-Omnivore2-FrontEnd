@@ -32,10 +32,10 @@ export const DigitalModalTextarea = styled.textarea`
 `;
 
 export const DigitalModalContentImgContainer = styled.div`
-  width: 180px;
-
   img {
-    width: 180px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
   }
 `;
 
