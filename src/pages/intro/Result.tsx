@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as S from "./Intro.styled";
 import { postCake } from "@apis/domain/cake/postCake";
 import { cakeMapping, colorToCakeImage } from "@constants/cakeColorConstants";
+import Button from "@components/button/Button";
 
 interface LocationState {
   resultPattern: string;
@@ -11,6 +12,7 @@ interface LocationState {
 const Result: React.FC = () => {
   const location = useLocation();
   const { resultPattern } = location.state as LocationState;
+  const navigate = useNavigate();
 
   const cake = cakeMapping[resultPattern] || {
     name: "순백의 생크림",
@@ -18,6 +20,10 @@ const Result: React.FC = () => {
   };
 
   const [isRequestSent, setIsRequestSent] = useState(false);
+
+  const handleClick = () => {
+    navigate("/digitalCake");
+  };
 
   useEffect(() => {
     if (!isRequestSent) {
@@ -45,6 +51,23 @@ const Result: React.FC = () => {
         케이크와 함께 <br /> <br />
         나만의 <span className="purple">개성</span>을 담아봐요:)
       </S.ResultText>
+      <S.ResultButtonWrapper>
+        <Button
+          scheme="CFC3DB"
+          style={{ justifyContent: "space-evenly" }}
+          onClick={handleClick}
+        >
+          <img
+            src="/images/intro/resultLeft.png"
+            style={{ width: "20px", height: "auto" }}
+          />
+          <span>My Cake</span>
+          <img
+            src="/images/intro/resultRight.png"
+            style={{ width: "15px", height: "auto" }}
+          />
+        </Button>
+      </S.ResultButtonWrapper>
     </S.ResultWrapper>
   );
 };
