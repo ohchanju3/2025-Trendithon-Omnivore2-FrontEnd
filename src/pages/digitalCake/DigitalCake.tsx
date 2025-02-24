@@ -6,6 +6,7 @@ import DigitalCakeModal from "@components/digitalCake/DigitalCakeModal";
 import DigitalCakeModalNoContent from "@components/digitalCake/digitalCakeModalNoContent";
 import { colorToCakeImage } from "@constants/cakeColorConstants";
 import { candleData } from "@constants/candleData";
+import { handleShare } from "@hooks/handleShare";
 
 const DigitalCake = () => {
   const [cakeData, setCakeData] = useState<CakeData | null>(null);
@@ -109,7 +110,11 @@ const DigitalCake = () => {
           <span>{cakeData?.likeCount || 0}</span>
         </Button>
         <Button scheme="E2DAEB">
-          <img src="public/images/shareBtn/Send.png" alt="shareBtnIcon" />
+          <img
+            src="public/images/shareBtn/Send.png"
+            alt="shareBtnIcon"
+            onClick={handleShare}
+          />
           <span>공유</span>
         </Button>
       </S.DigitalCakeBtnContainer>
