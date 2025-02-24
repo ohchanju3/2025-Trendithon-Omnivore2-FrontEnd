@@ -1,41 +1,52 @@
 import Button from "@components/button/Button.tsx";
 import { FriendsBar } from "../friendsBar/FriendsBar.tsx";
 import * as S from "./FriendsManageForm.styled.ts";
+import {
+	Follower,
+	getMyFollowers,
+} from "@apis/domain/mypage/getMyFollowers.ts";
+import { useEffect, useState } from "react";
+import { postFriendRequest } from "@apis/domain/mypage/postFriendRequest.ts";
 
 type FriendsManageFormProps = {
 	numOfFriends: number;
 };
 
 export const FriendsManageForm = ({ numOfFriends }: FriendsManageFormProps) => {
-	{
-		/* 임시 데이터 */
-	}
-	const data = [
-		{
-			profileImg: "",
-			name: "이민우",
-		},
-		{
-			profileImg: "",
-			name: "이민우",
-		},
-		{
-			profileImg: "",
-			name: "이민우",
-		},
-		{
-			profileImg: "",
-			name: "이민우",
-		},
-		{
-			profileImg: "",
-			name: "이민우",
-		},
-		{
-			profileImg: "",
-			name: "이민우",
-		},
-	];
+	const [data, setData] = useState<Follower[]>([]);
+	const [searchEmail, setSearchEmail] = useState("");
+
+	const fetchFriends = async () => {
+		console.log("fetchFriends 실행됨!");
+		const response = await getMyFollowers();
+		console.log("getMyFollowers API 응답 데이터:", response);
+
+		if (response) {
+			setData(response);
+		} else {
+			console.warn("API 응답이 없습니다.");
+		}
+	};
+
+	const fetchRequestFriends = async () => {
+		if (!searchEmail.trim()) {
+			alert("이메일을 입력해주세요!");
+			return;
+		}
+
+		const response = await postFriendRequest(searchEmail);
+		if (response) {
+			console.log("postFriendsRequest API 요청 응답 : ", response);
+			alert(response);
+			setSearchEmail("");
+		} else {
+			alert("친구 요청을 수행할 수 없습니다!");
+		}
+	};
+
+	useEffect(() => {
+		fetchFriends();
+	}, []);
 
 	return (
 		<S.FriendsManageFormWrapper>
@@ -44,13 +55,14 @@ export const FriendsManageForm = ({ numOfFriends }: FriendsManageFormProps) => {
 			</S.TitleText>
 			<S.SearchAndAddWrapper>
 				<S.SearchTab>
-					<input type="text" placeholder="친구 아이디 입력" />
+					<input
+						type="text"
+						placeholder="친구 아이디 입력"
+						value={searchEmail}
+						onChange={(e) => setSearchEmail(e.target.value)}
+					/>
 				</S.SearchTab>
-				<Button
-					scheme="E2DAEB"
-					width="40px"
-					onClick={() => alert("친구 추가 창")}
-				>
+				<Button scheme="E2DAEB" width="40px" onClick={fetchRequestFriends}>
 					<S.AddIcon
 						src="images/friends/add_friends.svg"
 						alt="addFriends"
@@ -59,7 +71,11 @@ export const FriendsManageForm = ({ numOfFriends }: FriendsManageFormProps) => {
 			</S.SearchAndAddWrapper>
 			<S.FriendsList $isScrollable={data.length > 3}>
 				{data.map((ele, index) => (
-					<FriendsBar key={index} profileImg={ele.profileImg} name={ele.name} />
+					<FriendsBar
+						key={index}
+						profileImg={ele.profileImage}
+						name={ele.name}
+					/>
 				))}
 			</S.FriendsList>
 		</S.FriendsManageFormWrapper>
