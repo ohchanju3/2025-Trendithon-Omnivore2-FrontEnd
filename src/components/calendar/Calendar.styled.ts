@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import 'react-calendar/dist/Calendar.css';
-import Calendar from 'react-calendar';
+import styled from "styled-components";
+import "react-calendar/dist/Calendar.css";
+import Calendar from "react-calendar";
 
 export const CalendarWrapper = styled.div``;
 
@@ -149,6 +149,10 @@ export const StyledCalendar = styled(Calendar)`
 	.react-calendar__month-view__weekdays__weekday > abbr {
 		text-decoration: none;
 	}
+	.has-cupcake {
+		border: none !important;
+		border-radius: 50%;
+	}
 `;
 
 export const ContentWrapper = styled.div`
@@ -164,7 +168,9 @@ export const DayWrapper = styled.div`
 	margin: 1.4rem;
 `;
 
-export const TextArea = styled.div`
+export const TextArea = styled.div.withConfig({
+	shouldForwardProp: (prop) => prop !== "emotion",
+})<{ $emotion: string }>`
 	margin: 1rem;
 	padding: 1rem;
 	border-radius: 10px;
@@ -175,8 +181,9 @@ export const TextArea = styled.div`
 	position: relative;
 
 	&::before {
-		content: '';
-		background: url('images/cupCake/happy_cupcake.svg') no-repeat center;
+		content: "";
+		background: ${({ $emotion }) =>
+			`url("images/cupCake/${$emotion}_cupcake.svg") no-repeat center`};
 		background-size: contain;
 		opacity: 0.2;
 		position: absolute;
@@ -199,4 +206,9 @@ export const LikeButton = styled.button`
 	& > span {
 		font-size: 1.2rem;
 	}
+`;
+
+export const EmotionLabel = styled.img`
+	position: absolute;
+	width: 40px;
 `;
