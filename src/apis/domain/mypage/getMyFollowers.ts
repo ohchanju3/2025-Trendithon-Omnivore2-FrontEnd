@@ -8,7 +8,7 @@ export type Follower = {
 };
 
 export const getMyFollowers = async (
-	page: number = 1,
+	page: number = 0,
 	size: number = 10,
 ): Promise<Follower[] | null> => {
 	const response = await getResponse<{
