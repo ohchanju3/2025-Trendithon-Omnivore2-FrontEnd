@@ -47,14 +47,6 @@ export const CandleBody = styled.img`
   scale: 0.3;
 `;
 
-export const UploadedImg = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  z-index: 5;
-`;
-
 export const DigitalCakeBtnContainer = styled.div`
   display: flex;
   gap: 3rem;
