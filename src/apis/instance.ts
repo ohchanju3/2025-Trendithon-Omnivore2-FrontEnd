@@ -64,6 +64,7 @@ export const getResponse = async <T>(url: string): Promise<T | null> => {
 		const response = await instance.get<T>(url);
 		return response.data;
 	} catch (error) {
+		console.error(error);
 		return null;
 	}
 };
@@ -74,6 +75,7 @@ export const deleteResponse = async (url: string): Promise<boolean> => {
 		await instance.delete(url);
 		return true;
 	} catch (error) {
+		console.error(error);
 		return false;
 	}
 };
@@ -88,6 +90,7 @@ export const postResponseNoData = async (url: string): Promise<boolean> => {
 		});
 		return true;
 	} catch (error) {
+		console.error(error);
 		return false;
 	}
 };
@@ -101,6 +104,7 @@ export const postResponse = async <TRequest, TResponse>(
 		const response = await instance.post<TResponse>(url, body);
 		return response.data;
 	} catch (error) {
+		console.error(error);
 		return null;
 	}
 };
@@ -114,6 +118,7 @@ export const postNoResponse = async <TRequest>(
 		await instance.post(url, requestBody);
 		return true;
 	} catch (error) {
+		console.error(error);
 		return false;
 	}
 };
@@ -127,6 +132,7 @@ export const patchNoResponse = async <TRequest>(
 		await instance.patch(url, requestBody);
 		return true;
 	} catch (error) {
+		console.error(error);
 		return false;
 	}
 };
@@ -140,6 +146,7 @@ export const patchResponse = async <TRequest, TResponse>(
 		const response = await instance.patch<TResponse>(url, requestBody);
 		return response.data;
 	} catch (error) {
+		console.error(error);
 		return null;
 	}
 };
