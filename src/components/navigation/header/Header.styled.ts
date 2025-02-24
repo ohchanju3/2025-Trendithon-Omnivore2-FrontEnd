@@ -16,7 +16,12 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 1.5rem;
+  position: relative;
 `;
+
+// export const HeaderLogoImgWrapper = styled.div`
+//   position: relative;
+// `;
 
 export const HeaderLogoImg = styled.img`
   cursor: pointer;
@@ -82,10 +87,21 @@ export const NavItem = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: white;
+    background-color: #f5e1c8;
+    color: #000000;
   }
 
   img {
     width: 24px;
   }
+`;
+
+export const NotificationDot = styled.div`
+  position: absolute;
+  top: -10px;
+  left: 18px;
+  width: 8px;
+  height: 8px;
+  background-color: #d4696b;
+  border-radius: 50%;
 `;

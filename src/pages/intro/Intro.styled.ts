@@ -67,6 +67,7 @@ export const ResultText = styled.h1`
   font-size: 1.7rem;
   line-height: 2rem;
   font-weight: semi-bold;
+  margin-bottom: 2rem;
 
   span.purple {
     color: #d7b0ff;
@@ -74,5 +75,15 @@ export const ResultText = styled.h1`
 
   span.bold {
     font-weight: 600;
+  }
+`;
+
+export const ResultButtonWrapper = styled.section`
+  display: flex;
+
+  span {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
   }
 `;

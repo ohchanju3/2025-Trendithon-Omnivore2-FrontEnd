@@ -60,13 +60,13 @@ instance.interceptors.response.use(
 
 // GET 요청
 export const getResponse = async <T>(url: string): Promise<T | null> => {
-	try {
-		const response = await instance.get<T>(url);
-		return response.data;
-	} catch (error) {
-		console.error(error);
-		return null;
-	}
+  try {
+    const response = await instance.get(url);
+    return response.data;
+  } catch (error) {
+    console.error("API 요청 실패", error);
+    return null;
+  }
 };
 
 // DELETE 요청
@@ -111,16 +111,27 @@ export const postResponse = async <TRequest, TResponse>(
 
 // POST 요청 (응답 데이터 없음)
 export const postNoResponse = async <TRequest>(
-	url: string,
-	requestBody: TRequest,
+  url: string,
+  requestBody: TRequest,
+  config?: { headers?: { [key: string]: string } }
 ): Promise<boolean> => {
-	try {
-		await instance.post(url, requestBody);
-		return true;
-	} catch (error) {
-		console.error(error);
-		return false;
-	}
+  try {
+    if (requestBody instanceof FormData) {
+      config = {
+        ...config,
+        headers: {
+          ...config?.headers,
+          "Content-Type": "multipart/form-data",
+        },
+      };
+    }
+
+    await instance.post(url, requestBody, config); // API 요청 전송
+    return true;
+  } catch (error) {
+    console.error("Error posting request:", error);
+    return false; 
+  }
 };
 
 // PATCH 요청 (응답 데이터 없음)
