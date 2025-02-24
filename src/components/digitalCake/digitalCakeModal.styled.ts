@@ -30,3 +30,25 @@ export const DigitalModalTextarea = styled.textarea`
   min-width: 250px;
   margin: 20px;
 `;
+
+export const DigitalModalContentImgContainer = styled.div`
+  width: 180px;
+
+  img {
+    width: 180px;
+  }
+`;
+
+export const DigitalModalContentTextarea = styled.div`
+  max-width: 300px;
+  width: 80%;
+  height: 180px;
+  background-color: #f0ecf5;
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: inset 0px 0px 5px 5px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  line-height: 22px;
+  min-width: 250px;
+  margin: 20px;
+`;

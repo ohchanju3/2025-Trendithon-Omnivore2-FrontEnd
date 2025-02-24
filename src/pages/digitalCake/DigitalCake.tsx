@@ -1,7 +1,8 @@
 import * as S from "./DigitalCake.styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@components/button/Button";
 import DigitalCakeModal from "@components/digitalCake/digitalCakeModal";
+import { CakeData, getCakeInfo } from "@apis/domain/cake/getCakeInfo";
 
 // 초와 동그라미의 위치 설정
 const candlePositions = [0, 30, 45, 60, 60]; // 초의 왼쪽 위치
@@ -26,47 +27,65 @@ const circleBodies = [
 ];
 
 const DigitalCake = () => {
-  const [modalOpen, setModalOpen] = useState<number | null>();
+  const [cakeData, setCakeData] = useState<CakeData | null>(null);
+  const [modalOpen, setModalOpen] = useState<number | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [liked, setLiked] = useState(false);
+
+  useEffect(() => {
+    const cakeId = Number(localStorage.getItem("cakeId"));
+    if (cakeId) {
+      getCakeInfo(cakeId).then((data) => {
+        console.log("받아온 케이크 데이터:", data);
+
+        if (data) {
+          setCakeData(data);
+        }
+      });
+    }
+  }, []);
 
   const handleCircleClick = (index: number) => {
     setModalOpen(index);
+    console.log("누른 버튼", index);
     setModalIsOpen(true);
-  };
-
-  const toggleLike = () => {
-    setLiked(!liked);
   };
 
   return (
     <S.DigitalCakeWrapper>
       <S.DigitalCakeContainer>
-        {/* TODO: 백엔드 응답 response data 확인 후 이미지 연결되도록 수정 필요 */}
         <S.DigitalCakeImg src="/images/intro/cream-cake.png" />
-        {candlePositions.map((pos, index) => (
-          <S.CandleContainer
-            key={index}
-            left={pos}
-            bottom={candleBottoms[index]}
-          >
-            {/* 동그라미 이미지 클릭 시 모달 열기 */}
-            <S.CandleCircle
-              top={circleTops[index]}
-              left={circleLefts[index]}
-              onClick={() => handleCircleClick(index)}
-              src={circleBodies[index]}
-              alt={`Circle ${index + 1}`}
-            />
 
-            {/* 촛대 이미지 */}
-            <S.CandleBody
-              src={candleBodies[index]}
-              alt={`촛대 ${index + 1}`}
-              height={candleHeights[index]}
-            />
-          </S.CandleContainer>
-        ))}
+        {cakeData &&
+          candlePositions.map((pos, index) => {
+            const matchedCandle = cakeData.candles?.find(
+              (candle) => candle.candleId === index
+            );
+            console.log("matched", matchedCandle);
+
+            return (
+              <S.CandleContainer
+                key={index}
+                left={pos}
+                bottom={candleBottoms[index]}
+              >
+                {/* 동그라미 이미지 클릭 시 모달 열기 */}
+                <S.CandleCircle
+                  top={circleTops[index]}
+                  left={circleLefts[index]}
+                  onClick={() => handleCircleClick(index)}
+                  src={matchedCandle?.imgUrl || circleBodies[index]}
+                  alt={`Circle ${index}`}
+                />
+
+                {/* 촛대 이미지 */}
+                <S.CandleBody
+                  src={candleBodies[index]}
+                  alt={`촛대 ${index + 1}`}
+                  height={candleHeights[index]}
+                />
+              </S.CandleContainer>
+            );
+          })}
 
         {/* 모달 */}
         {modalOpen !== null && (
@@ -76,17 +95,11 @@ const DigitalCake = () => {
           />
         )}
       </S.DigitalCakeContainer>
-      {/* TODO: api 연동시 좋아요 버튼 상태 필요 */}
+
       <S.DigitalCakeBtnContainer>
-        <Button scheme="E2DAEB" onClick={toggleLike}>
-          <img
-            src={
-              liked
-                ? "/images/shareBtn/likeBtn.png"
-                : "/images/shareBtn/unlikeBtn.png"
-            }
-          />
-          <span>13</span>
+        <Button scheme="E2DAEB">
+          <img src={"/images/shareBtn/likeBtn.png"} />
+          <span>{cakeData?.likeCount || 0}</span>
         </Button>
         <Button scheme="E2DAEB">
           <img src="public/images/shareBtn/Send.png" alt="shareBtnIcon" />

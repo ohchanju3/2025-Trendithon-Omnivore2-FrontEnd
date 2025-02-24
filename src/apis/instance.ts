@@ -61,9 +61,10 @@ instance.interceptors.response.use(
 // GET 요청
 export const getResponse = async <T>(url: string): Promise<T | null> => {
   try {
-    const response = await instance.get<T>(url);
+    const response = await instance.get(url);
     return response.data;
   } catch (error) {
+    console.error("API 요청 실패", error);
     return null;
   }
 };
