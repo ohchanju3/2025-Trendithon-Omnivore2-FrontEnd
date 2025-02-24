@@ -1,22 +1,27 @@
 import { FriendReqeustBox } from "@components/friends/friendsRequestBox/FriendsRequestBox.tsx";
 import * as S from "./FriendReqeust.styled.ts";
+import { useEffect, useState } from "react";
+import { Follower } from "@apis/domain/mypage/getMyFollowers.ts";
+import { getRequestFriends } from "@apis/domain/mypage/getRequestFriends.ts";
 
 export const FriendReqeust = () => {
-	const dummyData = [
-		{
-			name: "gildonggii",
-		},
-		{
-			name: "홍길동",
-		},
-		{
-			name: "고길동",
-		},
-	];
+	const [requestedData, setRequestedData] = useState<Follower[]>([]);
+
+	const fetchRequestFriends = async () => {
+		const response = await getRequestFriends();
+		if (response) {
+			console.log("getRequestFriends API 요청 응답 : ", response);
+			setRequestedData(response);
+		}
+	};
+
+	useEffect(() => {
+		fetchRequestFriends();
+	}, []);
 
 	return (
 		<S.FriendRequestWrapper>
-			{dummyData.map((data) => (
+			{requestedData.map((data) => (
 				<FriendReqeustBox name={data.name} />
 			))}
 		</S.FriendRequestWrapper>
