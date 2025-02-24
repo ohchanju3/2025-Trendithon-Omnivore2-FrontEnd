@@ -1,8 +1,9 @@
 import * as S from "./DigitalCake.styled";
 import { useEffect, useState } from "react";
 import Button from "@components/button/Button";
-import DigitalCakeModal from "@components/digitalCake/digitalCakeModal";
 import { CakeData, getCakeInfo } from "@apis/domain/cake/getCakeInfo";
+import DigitalCakeModal from "@components/digitalCake/DigitalCakeModal";
+import { colorToCakeImage } from "@constants/cakeColorConstants";
 
 // 초와 동그라미의 위치 설정
 const candlePositions = [0, 30, 45, 60, 60]; // 초의 왼쪽 위치
@@ -50,17 +51,20 @@ const DigitalCake = () => {
     setModalIsOpen(true);
   };
 
+  const cakeImage = cakeData
+    ? colorToCakeImage[cakeData.color] || "/images/intro/cream-cake.png"
+    : "/images/intro/cream-cake.png";
+
   return (
     <S.DigitalCakeWrapper>
       <S.DigitalCakeContainer>
-        <S.DigitalCakeImg src="/images/intro/cream-cake.png" />
+        <S.DigitalCakeImg src={cakeImage} />
 
         {cakeData &&
           candlePositions.map((pos, index) => {
             const matchedCandle = cakeData.candles?.find(
               (candle) => candle.candleId === index
             );
-            console.log("matched", matchedCandle);
 
             return (
               <S.CandleContainer

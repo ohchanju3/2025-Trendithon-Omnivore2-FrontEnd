@@ -10,7 +10,8 @@
       "@pages/*": ["src/pages/*"],
       "@atoms/*": ["src/atoms/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@apis/*": ["src/apis/*"]
+      "@apis/*": ["src/apis/*"],
+      "@constants/*": ["src/constants/*"]
     },
 
     "target": "ES2020",

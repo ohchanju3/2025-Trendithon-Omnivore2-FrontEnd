@@ -17,6 +17,7 @@ export default defineConfig({
       "@atoms": path.resolve(__dirname, "src/atoms"),
       "@hooks": path.resolve(__dirname, "src/hooks"),
       "@apis": path.resolve(__dirname, "src/apis"),
+      "@constants": path.resolve(__dirname, "src/constants"),
     },
   },
 });
