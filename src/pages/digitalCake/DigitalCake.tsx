@@ -109,12 +109,8 @@ const DigitalCake = () => {
           <img src={"/images/shareBtn/likeBtn.png"} />
           <span>{cakeData?.likeCount || 0}</span>
         </Button>
-        <Button scheme="E2DAEB">
-          <img
-            src="public/images/shareBtn/Send.png"
-            alt="shareBtnIcon"
-            onClick={handleShare}
-          />
+        <Button scheme="E2DAEB" onClick={handleShare}>
+          <img src="images/shareBtn/Send.png" alt="shareBtnIcon" />
           <span>공유</span>
         </Button>
       </S.DigitalCakeBtnContainer>
