@@ -26,7 +26,7 @@ const DigitalCakeModal = ({ isOpen, onClose }: DigitalCakeModalProps) => {
 	};
 
 	return (
-		<Modal isOpen={isOpen} onClose={onClose}>
+		<Modal isOpen={isOpen} onClose={onClose} buttonTitle="저장">
 			<S.DigitalModalWrapper>
 				<S.DigitalModalImgContainer>
 					<img
