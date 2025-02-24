@@ -1,6 +1,5 @@
 import * as S from "./CreateDailyCake.styled.ts";
 import { useState } from "react";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Button from "@components/button/Button.tsx";
 import { postCupCake } from "@apis/domain/cupcake/postCupCake.ts";
 
@@ -22,8 +21,9 @@ export const CreateDailyCake = ({ privacyMode }: CreateDailyCakeProps) => {
 		);
 		if (response) {
 			console.log("postCupCake API 요청 결과 : ", response);
+		} else {
+			alert("오늘자 컵케이크가 이미 생성되었습니다.");
 		}
-		console.log(response);
 	};
 
 	return (
