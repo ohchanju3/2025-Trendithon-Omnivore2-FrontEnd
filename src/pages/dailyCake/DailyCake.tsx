@@ -3,14 +3,20 @@ import * as S from "./DailyCake.styled";
 import Button from "@components/button/Button";
 import AddIcon from "@mui/icons-material/Add";
 import { DropDownButton } from "@components/button/DropDownButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "@components/modal/Modal";
 import { CreateDailyCake } from "@components/modal/createDailyCake/CreateDailyCake";
+import { updateAccess } from "@apis/domain/cupcake/updateAccess";
 
 const DailyCake = () => {
 	const options = ["전체공개", "친구공개", "비공개"];
 	const [privacyMode, setPrivacyMode] = useState(options[0]);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const privacyMapping: Record<string, string> = {
+		전체공개: "PUBLIC",
+		친구공개: "FRIEND",
+		비공개: "PRIVATE",
+	};
 
 	const handleShare = async () => {
 		const shareData = {
@@ -30,6 +36,15 @@ const DailyCake = () => {
 			console.error("공유 오류:", error);
 		}
 	};
+
+	useEffect(() => {
+		const mappedValue = privacyMapping[privacyMode];
+		if (mappedValue) {
+			updateAccess(mappedValue);
+		} else {
+			console.warn(`잘못된 privacyMode 값: ${privacyMode}`);
+		}
+	}, [privacyMode]);
 
 	return (
 		<S.StyledDailyCake>
@@ -59,11 +74,7 @@ const DailyCake = () => {
 					</Button>
 				</S.ShareButton>
 			</S.StyledButtons>
-			<Modal
-				isOpen={isModalOpen}
-				onClose={() => setIsModalOpen(false)}
-				buttonTitle="저장"
-			>
+			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
 				<CreateDailyCake />
 			</Modal>
 		</S.StyledDailyCake>
