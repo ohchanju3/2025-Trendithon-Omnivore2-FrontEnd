@@ -5,6 +5,7 @@ import * as S from "./Header.styled";
 const Header = () => {
   const navigate = useNavigate();
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [hasNotification, setHasNotification] = useState(true);
 
   const handleLeftLogoClick = () => {
     navigate("/mypage");
@@ -26,6 +27,7 @@ const Header = () => {
   return (
     <S.HeaderWrapper>
       <S.HeaderContainer>
+        {/* <S.HeaderLogoImgWrapper> */}
         <S.HeaderLogoImg
           src="/images/header/HeaderLogoLeft.png"
           onClick={handleLeftLogoClick}
@@ -38,6 +40,8 @@ const Header = () => {
           src="/images/header/HeaderLogoRight.png"
           onClick={handleRightLogoClick}
         />
+        {hasNotification && <S.NotificationDot />}
+        {/* </S.HeaderLogoImgWrapper> */}
       </S.HeaderContainer>
 
       {isNavOpen && <S.Overlay onClick={handleRightLogoClick} />}
