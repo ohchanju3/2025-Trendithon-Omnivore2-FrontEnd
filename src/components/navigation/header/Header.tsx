@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import * as S from "./Header.styled";
+import SseNotification from "@apis/domain/nav/SseNotification";
 
 const Header = () => {
   const navigate = useNavigate();
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [hasNotification, setHasNotification] = useState(true);
 
   const handleLeftLogoClick = () => {
     navigate("/mypage");
@@ -26,6 +28,7 @@ const Header = () => {
   return (
     <S.HeaderWrapper>
       <S.HeaderContainer>
+        {/* <S.HeaderLogoImgWrapper> */}
         <S.HeaderLogoImg
           src="/images/header/HeaderLogoLeft.png"
           onClick={handleLeftLogoClick}
@@ -38,6 +41,8 @@ const Header = () => {
           src="/images/header/HeaderLogoRight.png"
           onClick={handleRightLogoClick}
         />
+        {hasNotification && <S.NotificationDot />}
+        {/* </S.HeaderLogoImgWrapper> */}
       </S.HeaderContainer>
 
       {isNavOpen && <S.Overlay onClick={handleRightLogoClick} />}
@@ -63,6 +68,7 @@ const Header = () => {
           </S.NavItemContainer>
         </S.Navbar>
       )}
+      <SseNotification setHasNotification={setHasNotification} />
     </S.HeaderWrapper>
   );
 };
