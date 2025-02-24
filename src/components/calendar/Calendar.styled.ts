@@ -168,7 +168,9 @@ export const DayWrapper = styled.div`
 	margin: 1.4rem;
 `;
 
-export const TextArea = styled.div`
+export const TextArea = styled.div.withConfig({
+	shouldForwardProp: (prop) => prop !== "emotion",
+})<{ $emotion: string }>`
 	margin: 1rem;
 	padding: 1rem;
 	border-radius: 10px;
@@ -180,7 +182,8 @@ export const TextArea = styled.div`
 
 	&::before {
 		content: "";
-		background: url("images/cupCake/happy_cupcake.svg") no-repeat center;
+		background: ${({ $emotion }) =>
+			`url("images/cupCake/${$emotion}_cupcake.svg") no-repeat center`};
 		background-size: contain;
 		opacity: 0.2;
 		position: absolute;
