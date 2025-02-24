@@ -35,7 +35,7 @@ export const CreateDailyCake = ({ privacyMode }: CreateDailyCakeProps) => {
 						<img src={`images/cupCake/${emotion}_cupcake.svg`} alt={emotion} />
 						{emoji === emotion && (
 							<S.CheckIcon>
-								<CheckCircleIcon />
+								<img src="images/cupCake/check_icon.svg" />
 							</S.CheckIcon>
 						)}
 					</S.emojiBox>
