@@ -1,10 +1,5 @@
 import { getResponse } from "@apis/instance";
-
-export type CupCakeDTO = {
-	cupCakeId: number;
-	emotion: string;
-	date: string;
-};
+import { CupCakeDTO } from "./getCupCake";
 
 export const getMyCupcakes = async (
 	date: Date,
