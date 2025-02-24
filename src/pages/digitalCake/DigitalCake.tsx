@@ -2,11 +2,11 @@ import * as S from "./DigitalCake.styled";
 import { useEffect, useState } from "react";
 import Button from "@components/button/Button";
 import { CakeData, getCakeInfo } from "@apis/domain/cake/getCakeInfo";
-import DigitalCakeModal from "@components/digitalCake/DigitalCakeModal";
 import DigitalCakeModalNoContent from "@components/digitalCake/digitalCakeModalNoContent";
 import { colorToCakeImage } from "@constants/cakeColorConstants";
 import { candleData } from "@constants/candleData";
 import { handleShare } from "@hooks/handleShare";
+import DigitalCakeModalContent from "@components/digitalCake/digitalCakeModal";
 
 const DigitalCake = () => {
   const [cakeData, setCakeData] = useState<CakeData | null>(null);
@@ -79,7 +79,7 @@ const DigitalCake = () => {
         {modalOpen !== null && modalIsOpen && cakeData && (
           <>
             {isMatchedCandle ? (
-              <DigitalCakeModal
+              <DigitalCakeModalContent
                 isOpen={modalIsOpen}
                 onClose={() => setModalIsOpen(false)}
                 imgUrl={

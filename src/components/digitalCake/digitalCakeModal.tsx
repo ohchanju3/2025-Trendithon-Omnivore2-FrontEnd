@@ -8,7 +8,7 @@ interface DigitalCakeModalProps {
   content: string;
 }
 
-const DigitalCakeModal = ({
+const DigitalCakeModalContent = ({
   isOpen,
   onClose,
   imgUrl,
@@ -26,4 +26,4 @@ const DigitalCakeModal = ({
   );
 };
 
-export default DigitalCakeModal;
+export default DigitalCakeModalContent;
