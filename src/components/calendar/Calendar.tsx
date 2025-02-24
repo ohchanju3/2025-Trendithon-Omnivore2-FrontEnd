@@ -18,21 +18,22 @@ export const CalendarForm = () => {
 
 	const formatDate = (date: Date) => date.toISOString().split("T")[0];
 
-	useEffect(() => {
-		const fetchCupcakes = async () => {
-			const today = new Date();
-			const response = await getMyCupcakes(today);
+	const fetchMyCupcakes = async () => {
+		const today = new Date();
+		const response = await getMyCupcakes(today);
+		if (response) {
+			console.log("getMyCupcakes API 응답 데이터 : ", response);
 			setCupcakes(response);
 
-			if (response) {
-				const formattedDates = response.map((cupcake) =>
-					formatDate(new Date(cupcake.date)),
-				);
-				setCupcakeDates(formattedDates);
-			}
-		};
+			const formattedDates = response.map((cupcake) =>
+				formatDate(new Date(cupcake.date)),
+			);
+			setCupcakeDates(formattedDates);
+		}
+	};
 
-		fetchCupcakes();
+	useEffect(() => {
+		fetchMyCupcakes();
 	}, []);
 
 	const handleDateClick = (value: Date) => {
