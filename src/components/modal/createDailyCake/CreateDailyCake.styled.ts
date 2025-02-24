@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const CreateDailyCakeWrapper = styled.div`
 	display: flex;
@@ -6,7 +6,6 @@ export const CreateDailyCakeWrapper = styled.div`
 	gap: 0.4rem;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 2rem;
 `;
 
 export const DateWrappter = styled.div`
@@ -51,4 +50,10 @@ export const CheckIcon = styled.div`
 	position: absolute;
 	top: 70%;
 	left: 60%;
+`;
+
+export const SubmitBtn = styled.div`
+	Button {
+		margin: 1rem;
+	}
 `;
