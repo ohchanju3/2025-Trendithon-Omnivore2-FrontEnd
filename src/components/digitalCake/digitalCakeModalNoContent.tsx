@@ -5,13 +5,11 @@ import * as S from "./digitalCakeModal.styled";
 interface DigitalCakeModalProps {
   isOpen: boolean;
   onClose: () => void;
-  content: string;
 }
 
 const DigitalCakeModalNoContent = ({
   isOpen,
   onClose,
-  content,
 }: DigitalCakeModalProps) => {
   const [imageSrc, setImageSrc] = useState(
     "/images/digitalCake/modalAddImg.png"
@@ -21,6 +19,8 @@ const DigitalCakeModalNoContent = ({
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      console.log("선택된 파일:", file);
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setImageSrc(reader.result as string);
@@ -53,11 +53,7 @@ const DigitalCakeModalNoContent = ({
             onChange={handleImageChange}
           />
         </S.DigitalModalImgContainer>
-        <S.DigitalModalTextarea
-          placeholder="이미지 관련 상세설명을 적어주세요!"
-          value={content}
-          readOnly
-        />
+        <S.DigitalModalTextarea placeholder="이미지 관련 상세설명을 적어주세요!" />
       </S.DigitalModalWrapper>
     </Modal>
   );

@@ -3,51 +3,32 @@ import { useEffect, useState } from "react";
 import Button from "@components/button/Button";
 import { CakeData, getCakeInfo } from "@apis/domain/cake/getCakeInfo";
 import DigitalCakeModal from "@components/digitalCake/DigitalCakeModal";
+import DigitalCakeModalNoContent from "@components/digitalCake/digitalCakeModalNoContent";
 import { colorToCakeImage } from "@constants/cakeColorConstants";
-
-// 초와 동그라미의 위치 설정
-const candlePositions = [0, 30, 45, 60, 60]; // 초의 왼쪽 위치
-const candleBottoms = [36, 30, 35, 40, 45]; // 초의 아래쪽 위치
-const candleHeights = [290, 290, 350, 250, 270]; //초의 길이
-const circleTops = [40, 45, 55, 30, 35]; // 동그라미의 위쪽 위치
-const circleLefts = [0, -12, -15, -20, 50]; // 동그라미의 왼쪽 위치
-const candleBodies = [
-  "/images/digitalCake/candle_body1.png",
-  "/images/digitalCake/candle_body2.png",
-  "/images/digitalCake/candle_body3.png",
-  "/images/digitalCake/candle_body4.png",
-  "/images/digitalCake/candle_body5.png",
-];
-
-const circleBodies = [
-  "/images/digitalCake/circle1.png",
-  "/images/digitalCake/circle2.png",
-  "/images/digitalCake/circle3.png",
-  "/images/digitalCake/circle4.png",
-  "/images/digitalCake/circle5.png",
-];
+import { candleData } from "@constants/candleData";
 
 const DigitalCake = () => {
   const [cakeData, setCakeData] = useState<CakeData | null>(null);
   const [modalOpen, setModalOpen] = useState<number | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isMatchedCandle, setIsMatchedCandle] = useState<boolean>(true);
 
   useEffect(() => {
     const cakeId = Number(localStorage.getItem("cakeId"));
     if (cakeId) {
       getCakeInfo(cakeId).then((data) => {
-        console.log("받아온 케이크 데이터:", data);
-
-        if (data) {
-          setCakeData(data);
-        }
+        if (data) setCakeData(data);
       });
     }
   }, []);
 
   const handleCircleClick = (index: number) => {
+    const matchedCandle = cakeData?.candles?.find(
+      //Todo: candleId 추후 백 수정 후 프 변경 필요 (아마 candleIndex로)
+      (candle) => candle.candleId === index
+    );
+    setIsMatchedCandle(!!matchedCandle);
     setModalOpen(index);
-    console.log("누른 버튼", index);
     setModalIsOpen(true);
   };
 
@@ -61,42 +42,50 @@ const DigitalCake = () => {
         <S.DigitalCakeImg src={cakeImage} />
 
         {cakeData &&
-          candlePositions.map((pos, index) => {
+          candleData.map((candle, index) => {
             const matchedCandle = cakeData.candles?.find(
-              (candle) => candle.candleId === index
+              //Todo: candleId 추후 백 수정 후 프 변경 필요 (아마 candleIndex로)
+              (candleItem) => candleItem.candleId === index
             );
 
             return (
               <S.CandleContainer
                 key={index}
-                left={pos}
-                bottom={candleBottoms[index]}
+                left={candle.position}
+                bottom={candle.bottom}
               >
-                {/* 동그라미 이미지 클릭 시 모달 열기 */}
                 <S.CandleCircle
-                  top={circleTops[index]}
-                  left={circleLefts[index]}
+                  top={candle.circleTop}
+                  left={candle.circleLeft}
                   onClick={() => handleCircleClick(index)}
-                  src={matchedCandle?.imgUrl || circleBodies[index]}
+                  src={matchedCandle?.imgUrl || candle.circleBody}
                   alt={`Circle ${index}`}
                 />
 
-                {/* 촛대 이미지 */}
                 <S.CandleBody
-                  src={candleBodies[index]}
+                  src={candle.candleBody}
                   alt={`촛대 ${index + 1}`}
-                  height={candleHeights[index]}
+                  height={candle.height}
                 />
               </S.CandleContainer>
             );
           })}
 
         {/* 모달 */}
-        {modalOpen !== null && (
-          <DigitalCakeModal
-            isOpen={modalIsOpen}
-            onClose={() => setModalIsOpen(false)}
-          />
+        {modalOpen !== null && modalIsOpen && (
+          <>
+            {isMatchedCandle ? (
+              <DigitalCakeModal
+                isOpen={modalIsOpen}
+                onClose={() => setModalIsOpen(false)}
+              />
+            ) : (
+              <DigitalCakeModalNoContent
+                isOpen={modalIsOpen}
+                onClose={() => setModalIsOpen(false)}
+              />
+            )}
+          </>
         )}
       </S.DigitalCakeContainer>
 
