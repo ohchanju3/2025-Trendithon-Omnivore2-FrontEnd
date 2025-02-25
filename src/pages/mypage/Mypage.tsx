@@ -29,7 +29,8 @@ const Mypage = () => {
 		const response = await updateMyInfo(myData.nickName);
 		if (response) {
 			console.log("updateMyInfo API 응답 데이터 : ", response);
-		}
+			alert("정보가 변경되었습니다!");
+		} else alert("회원 정보 변경에 실패했습니다 !");
 	};
 
 	useEffect(() => {
