@@ -36,3 +36,7 @@ export const TextArea = styled.div`
 `;
 
 export const DateAndOwner = styled.div``;
+
+export const Nickname = styled.div`
+	font-weight: bold;
+`;

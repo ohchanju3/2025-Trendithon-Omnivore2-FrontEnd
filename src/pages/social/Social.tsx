@@ -85,6 +85,7 @@ export const Social = () => {
 									key={index}
 									liked={data.like}
 									likedNum={data.likeCount}
+									nickname={data.nickname}
 									onClick={() => handleCupcakeClick(data)}
 								/>
 							))

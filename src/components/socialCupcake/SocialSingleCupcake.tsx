@@ -5,6 +5,7 @@ type SocialCupcakeProps = {
 	liked: boolean;
 	likedNum: number;
 	date: string;
+	nickname: string;
 	onClick?: () => void;
 };
 
@@ -13,6 +14,7 @@ export const SocialSingleCupcake = ({
 	liked,
 	likedNum,
 	date,
+	nickname,
 	onClick,
 }: SocialCupcakeProps) => {
 	return (
@@ -35,6 +37,7 @@ export const SocialSingleCupcake = ({
 				<S.DateAndOwner>
 					<span>{new Date(date).toLocaleDateString()}</span>
 				</S.DateAndOwner>
+				<S.Nickname>{nickname}</S.Nickname>
 			</S.TextArea>
 		</S.CupCakeWrapper>
 	);
