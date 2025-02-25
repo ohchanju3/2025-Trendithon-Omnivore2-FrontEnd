@@ -8,6 +8,7 @@ import {
 	SocialCupcake,
 } from "@apis/domain/social/getSocialCupcakes.ts";
 import { SocialSingleCupcake } from "@components/socialCupcake/SocialSingleCupcake.tsx";
+import { Modal } from "@components/modal/Modal.tsx";
 
 export const Social = () => {
 	const [numOfCakes, setNumOfCakes] = useState(0);
@@ -18,11 +19,14 @@ export const Social = () => {
 	const [socialCupcakeData, setSocialCupcakeData] = useState<SocialCupcake[]>(
 		[],
 	);
+	const [selectedCupcake, setSelectedCupcake] = useState<SocialCupcake | null>(
+		null,
+	);
+	const [modalIsOpen, setModalIsOpen] = useState(false);
 
 	const fetchSocialCakes = async () => {
 		const response = await getSocialCakes();
 		if (response) {
-			console.log("getSocialCakes API 응답 데이터:", response);
 			setSocialCakeData(response);
 			setNumOfCakes(response.length);
 		}
@@ -31,7 +35,6 @@ export const Social = () => {
 	const fetchSocialCupcakes = async () => {
 		const response = await getSocialCupcakes();
 		if (response) {
-			console.log("getSocialCupcakes API 응답 데이터 : ", response);
 			setSocialCupcakeData(response);
 		}
 	};
@@ -41,9 +44,10 @@ export const Social = () => {
 		fetchSocialCupcakes();
 	}, []);
 
-	useEffect(() => {
-		setSelectedTap(`Cakes(${numOfCakes})`);
-	}, [numOfCakes]);
+	const handleCupcakeClick = (data: SocialCupcake) => {
+		setSelectedCupcake(data);
+		setModalIsOpen(true);
+	};
 
 	return (
 		<S.SocialWrapper>
@@ -68,7 +72,7 @@ export const Social = () => {
 								/>
 							))
 						) : (
-							<S.NoDataMessage>데이터가 존재하지 않습니다.</S.NoDataMessage>
+							<div>데이터가 존재하지 않습니다.</div>
 						)}
 					</S.CakeWrapper>
 				) : (
@@ -81,15 +85,36 @@ export const Social = () => {
 									key={index}
 									liked={data.like}
 									likedNum={data.likeCount}
-									nickname={data.nickname}
+									onClick={() => handleCupcakeClick(data)}
 								/>
 							))
 						) : (
-							<S.NoDataMessage>데이터가 존재하지 않습니다.</S.NoDataMessage>
+							<div>데이터가 존재하지 않습니다.</div>
 						)}
 					</S.CupCakeWrapper>
 				)}
 			</S.Content>
+
+			<Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}>
+				<S.ContentWrapper>
+					<S.DayWrapper>
+						{selectedCupcake
+							? new Date(selectedCupcake.date).toLocaleDateString()
+							: ""}
+					</S.DayWrapper>
+					<S.TextArea
+						$emotion={selectedCupcake?.emotion.toLowerCase() || "default"}
+					>
+						{selectedCupcake?.content || ""}
+					</S.TextArea>
+					<S.LikeButton>
+						<img src="/images/likeBtn/heart.png" alt="heart" />
+						<span>{selectedCupcake?.likeCount || 0}</span>
+					</S.LikeButton>
+				</S.ContentWrapper>
+			</Modal>
 		</S.SocialWrapper>
 	);
 };
+
+export default Social;

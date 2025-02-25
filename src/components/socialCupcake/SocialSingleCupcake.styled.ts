@@ -34,3 +34,5 @@ export const TextArea = styled.div`
 		width: 20px;
 	}
 `;
+
+export const DateAndOwner = styled.div``;

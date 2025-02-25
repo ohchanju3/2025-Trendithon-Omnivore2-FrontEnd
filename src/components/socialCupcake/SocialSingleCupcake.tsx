@@ -5,7 +5,7 @@ type SocialCupcakeProps = {
 	liked: boolean;
 	likedNum: number;
 	date: string;
-	nickname: string;
+	onClick?: () => void;
 };
 
 export const SocialSingleCupcake = ({
@@ -13,14 +13,10 @@ export const SocialSingleCupcake = ({
 	liked,
 	likedNum,
 	date,
-	nickname,
+	onClick,
 }: SocialCupcakeProps) => {
-	const getDate = () => {
-		const newDate = new Date(date);
-		return newDate.toLocaleDateString();
-	};
 	return (
-		<S.CupCakeWrapper>
+		<S.CupCakeWrapper onClick={onClick}>
 			<S.ImgBox
 				src={`images/cupCake/${emotion.toLowerCase()}_cupcake.svg`}
 			></S.ImgBox>
@@ -29,15 +25,16 @@ export const SocialSingleCupcake = ({
 					<img
 						src={
 							liked
-								? "/images/shareBtn/likeBtn.png"
-								: "/images/shareBtn/unlikeBtn.png"
+								? "/images/likeBtn/heart-filled.png"
+								: "/images/likeBtn/heart.png"
 						}
+						alt="like-icon"
 					/>
 					<span>{likedNum}</span>
 				</S.LikeBox>
-
-				<span>{getDate()}</span>
-				<span>{nickname}</span>
+				<S.DateAndOwner>
+					<span>{new Date(date).toLocaleDateString()}</span>
+				</S.DateAndOwner>
 			</S.TextArea>
 		</S.CupCakeWrapper>
 	);
