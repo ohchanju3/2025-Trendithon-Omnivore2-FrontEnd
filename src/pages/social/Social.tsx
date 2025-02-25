@@ -12,6 +12,7 @@ import {
 } from "@apis/domain/social/getSocialCupcakes.ts";
 import { SocialSingleCupcake } from "@components/socialCupcake/SocialSingleCupcake.tsx";
 import { Modal } from "@components/modal/Modal.tsx";
+import { postLikeCupcake } from "@apis/domain/cupcake/postLikeCupcake.ts";
 
 export const Social = () => {
 	const [numOfCakes, setNumOfCakes] = useState(0);
@@ -39,12 +40,28 @@ export const Social = () => {
 		}
 	};
 
-	const fetchSocialCupcakes = async () => {
+	const fetchSocialCupcakes = async (): Promise<SocialCupcake[]> => {
 		const response = await getSocialCupcakes();
 		if (response && response.length > 0) {
 			setSocialCupcakeData(response);
+			return response;
 		} else {
 			setSocialCupcakeData([]);
+			return [];
+		}
+	};
+
+	const handleLikeBtn = async (cupcakeId: string) => {
+		await postLikeCupcake(cupcakeId);
+		await fetchSocialCakes();
+		const updatedCupcakes = await fetchSocialCupcakes();
+		if (selectedCupcake) {
+			const updatedCupcake = updatedCupcakes.find(
+				(cupcake) => cupcake.cupcakeId.toString() === cupcakeId,
+			);
+			if (updatedCupcake) {
+				setSelectedCupcake(updatedCupcake);
+			}
 		}
 	};
 
@@ -129,7 +146,12 @@ export const Social = () => {
 					>
 						{selectedCupcake?.content || ""}
 					</S.TextArea>
-					<S.LikeButton>
+					<S.LikeButton
+						onClick={() => {
+							const cupcakeId = selectedCupcake?.cupcakeId;
+							handleLikeBtn(cupcakeId?.toString() ?? "");
+						}}
+					>
 						<img src="/images/likeBtn/heart.png" alt="heart" />
 						<span>{selectedCupcake?.likeCount || 0}</span>
 					</S.LikeButton>
