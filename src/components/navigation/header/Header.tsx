@@ -20,7 +20,7 @@ const Header = () => {
   };
 
   const handleLogoClick = () => {
-    navigate("/dailyCake");
+    navigate("/digitalCake");
   };
 
   const handleRightLogoClick = () => {
