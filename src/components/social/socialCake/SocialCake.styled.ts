@@ -18,8 +18,7 @@ export const CakeInfo = styled.div`
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
-	color: #313131;
-	font-size: 1rem;
+	color: white;
 `;
 
 export const CakeWrapper = styled.img`
