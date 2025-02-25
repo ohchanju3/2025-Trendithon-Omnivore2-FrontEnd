@@ -1,11 +1,13 @@
 import { FriendReqeustBox } from "@components/friends/friendsRequestBox/FriendsRequestBox.tsx";
 import * as S from "./FriendReqeust.styled.ts";
 import { useEffect, useState } from "react";
-import { Follower } from "@apis/domain/mypage/getMyFollowers.ts";
-import { getRequestFriends } from "@apis/domain/mypage/getRequestFriends.ts";
+import {
+	FollowerWithId,
+	getRequestFriends,
+} from "@apis/domain/mypage/getRequestFriends.ts";
 
 export const FriendReqeust = () => {
-	const [requestedData, setRequestedData] = useState<Follower[]>([]);
+	const [requestedData, setRequestedData] = useState<FollowerWithId[]>([]);
 
 	const fetchRequestFriends = async () => {
 		const response = await getRequestFriends();
@@ -28,7 +30,7 @@ export const FriendReqeust = () => {
 					<FriendReqeustBox
 						key={data.memberId}
 						name={data.nickname}
-						followerId={data.memberId.toString()}
+						followerId={data.followId.toString()}
 						onSuccess={fetchRequestFriends}
 					/>
 				))

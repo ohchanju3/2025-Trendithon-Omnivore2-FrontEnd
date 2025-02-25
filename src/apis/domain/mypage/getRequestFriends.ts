@@ -1,15 +1,22 @@
 import { getResponse } from "@apis/instance";
-import { Follower } from "./getMyFollowers";
+
+export type FollowerWithId = {
+	memberId: number;
+	followId: number;
+	nickname: string;
+	name: string;
+	profileImage: string;
+};
 
 export const getRequestFriends = async (
 	page: number = 0,
 	size: number = 10,
-): Promise<Follower[] | null> => {
+): Promise<FollowerWithId[] | null> => {
 	const response = await getResponse<{
 		statusCode: number;
 		message: string;
 		data: {
-			followInfoResDto: Follower[];
+			followInfoResDto: FollowerWithId[];
 			pageInfoResDto: {
 				currentPage: number;
 				totalPages: number;
