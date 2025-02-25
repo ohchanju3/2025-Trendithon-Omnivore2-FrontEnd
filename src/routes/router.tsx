@@ -16,63 +16,68 @@ import Result from "@pages/intro/Result";
 import { FriendReqeust } from "@pages/mypage/friendRequest/FriendRequest";
 import { DetailFriends } from "@pages/mypage/detailFriends/DetailFriends";
 import { Social } from "@pages/social/Social";
+import SseTest from "@pages/test/SseTest";
 
 const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <RootLayout />,
-		children: [
-			{
-				path: "login",
-				element: <Login />,
-			},
-			{
-				path: "/api/oauth2/callback/:provider",
-				element: <OAuthRedirectHandler />,
-			},
-			{
-				path: "intro",
-				element: <Intro />,
-			},
-			{
-				path: "question",
-				element: <Question />,
-			},
-			{
-				path: "result",
-				element: <Result />,
-			},
-			{
-				element: <DefalutLayout />,
-				children: [
-					{
-						path: "mypage",
-						element: <Mypage />,
-					},
-					{
-						path: "detailfriends",
-						element: <DetailFriends />,
-					},
-					{
-						path: "friendrequet",
-						element: <FriendReqeust />,
-					},
-					{
-						path: "digitalCake",
-						element: <DigitalCake />,
-					},
-					{
-						path: "dailyCake",
-						element: <DailyCake />,
-					},
-					{
-						path: "social",
-						element: <Social />,
-					},
-				],
-			},
-		],
-	},
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "/api/oauth2/callback/:provider",
+        element: <OAuthRedirectHandler />,
+      },
+      {
+        path: "intro",
+        element: <Intro />,
+      },
+      {
+        path: "question",
+        element: <Question />,
+      },
+      {
+        path: "result",
+        element: <Result />,
+      },
+      {
+        element: <DefalutLayout />,
+        children: [
+          {
+            path: "mypage",
+            element: <Mypage />,
+          },
+          {
+            path: "detailfriends",
+            element: <DetailFriends />,
+          },
+          {
+            path: "friendrequet",
+            element: <FriendReqeust />,
+          },
+          {
+            path: "digitalCake",
+            element: <DigitalCake />,
+          },
+          {
+            path: "dailyCake",
+            element: <DailyCake />,
+          },
+          {
+            path: "social",
+            element: <Social />,
+          },
+          {
+            path: "test",
+            element: <SseTest />,
+          },
+        ],
+      },
+    ],
+  },
 ]);
 
 export default router;

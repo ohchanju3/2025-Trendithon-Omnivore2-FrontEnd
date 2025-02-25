@@ -1,56 +1,69 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Modal } from "@components/modal/Modal";
 import * as S from "./digitalCakeModal.styled";
 import { postCakeCandles } from "@apis/domain/digitalCake/postCakeCandles";
+import { patchCakeCandles } from "@apis/domain/digitalCake/patchCakeCandles";
 import Button from "@components/button/Button";
 
 interface DigitalCakeModalProps {
   isOpen: boolean;
   onClose: () => void;
   candleIndex: number;
+  existingImage: string;
+  existingContent: string;
 }
 
 const DigitalCakeModalNoContent = ({
   isOpen,
   onClose,
   candleIndex,
+  existingImage,
+  existingContent,
 }: DigitalCakeModalProps) => {
   const [image, setImage] = useState<File | null>(null);
-  const [isImageSelected, setIsImageSelected] = useState(false);
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(existingContent);
+  const [imageChanged, setImageChanged] = useState(false);
+
+  useEffect(() => {
+    setContent(existingContent);
+    if (!existingImage) {
+      setImage(null);
+    }
+    setImageChanged(false);
+  }, [existingContent, existingImage]);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setImage(file);
-      setIsImageSelected(true);
+      setImageChanged(true);
     }
   };
 
   const handleSave = async () => {
-    if (!image) {
-      alert("이미지를 선택해주세요.");
-      return;
-    }
-
-    if (!content.trim()) {
-      alert("내용을 입력해주세요.");
+    if (!content.trim() && !imageChanged) {
+      alert("변경된 내용이 없습니다.");
       return;
     }
 
     const formData = new FormData();
 
-    const requestBody = {
-      request: {
-        content,
-        candleIndex,
-      },
-      image,
-    };
-    formData.append("request", JSON.stringify(requestBody.request));
-    formData.append("image", image);
+    const requestBody: Record<string, any> = { candleIndex };
 
-    const result = await postCakeCandles(formData);
+    if (content !== existingContent) {
+      requestBody.content = content;
+    }
+
+    if (imageChanged && image) {
+      formData.append("image", image);
+    }
+
+    formData.append("request", JSON.stringify(requestBody));
+
+    // 기존 데이터가 있었으면 PATCH, 새 데이터면 POST
+    const result = await (existingImage || existingContent
+      ? patchCakeCandles(formData)
+      : postCakeCandles(formData));
 
     if (result) {
       onClose();
@@ -67,17 +80,16 @@ const DigitalCakeModalNoContent = ({
             src={
               image
                 ? URL.createObjectURL(image)
-                : "/images/digitalCake/modalAddImg.png"
+                : existingImage || "/images/digitalCake/modalAddImg.png"
             }
             alt="선택된 이미지"
             onClick={() => document.getElementById("imageUpload")?.click()}
             style={{
-              borderRadius: isImageSelected ? "50%" : "",
-              width: isImageSelected ? "150px" : "40%",
-              height: isImageSelected ? "150px" : "",
+              borderRadius: image ? "50%" : "",
+              width: image ? "150px" : "",
+              height: image ? "150px" : "",
             }}
           />
-          {/* 파일 선택 input */}
           <input
             type="file"
             id="imageUpload"

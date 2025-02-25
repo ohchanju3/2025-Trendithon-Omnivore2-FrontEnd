@@ -6,7 +6,7 @@ import SseNotification from "@apis/domain/nav/SseNotification";
 const Header = () => {
   const navigate = useNavigate();
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const [hasNotification, setHasNotification] = useState(true);
+  const [hasNotification, setHasNotification] = useState(false);
 
   const handleLeftLogoClick = () => {
     navigate("/mypage");
@@ -28,7 +28,6 @@ const Header = () => {
   return (
     <S.HeaderWrapper>
       <S.HeaderContainer>
-        {/* <S.HeaderLogoImgWrapper> */}
         <S.HeaderLogoImg
           src="/images/header/HeaderLogoLeft.png"
           onClick={handleLeftLogoClick}
@@ -41,8 +40,7 @@ const Header = () => {
           src="/images/header/HeaderLogoRight.png"
           onClick={handleRightLogoClick}
         />
-        {hasNotification && <S.NotificationDot />}
-        {/* </S.HeaderLogoImgWrapper> */}
+        {hasNotification && <S.NotificationDot />} {/* 알림 상태에 따라 표시 */}
       </S.HeaderContainer>
 
       {isNavOpen && <S.Overlay onClick={handleRightLogoClick} />}
