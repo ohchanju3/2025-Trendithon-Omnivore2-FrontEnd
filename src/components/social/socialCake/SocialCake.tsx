@@ -1,16 +1,57 @@
 import * as S from "./SocialCake.styled.ts";
+import { candleData } from "@constants/candleData";
+
+type Candle = {
+	candleId: number;
+	imgUrl: string;
+	content: string;
+	candleIndex: number;
+};
 
 type SocialCakeProps = {
 	liked: boolean;
 	likedNum: number;
 	owner: string;
+	candles?: Candle[];
 };
 
-export const SocialCake = ({ liked, likedNum, owner }: SocialCakeProps) => {
+export const SocialCake = ({
+	liked,
+	likedNum,
+	owner,
+	candles = [],
+}: SocialCakeProps) => {
 	return (
 		<S.SocialCakeWrapper>
-			{/* 케이크 컴포넌트 만들면 수정해야할듯! */}
-			<S.CakeWrapper src="/images/intro/cream-cake.png"></S.CakeWrapper>
+			<S.CakeContainer>
+				<S.CakeWrapper src="/images/intro/cream-cake.png" />
+				{candleData.map((candle, index) => {
+					const matchedCandle = candles.find(
+						(candleItem) => candleItem.candleIndex === index,
+					);
+					return (
+						<S.CandleContainer
+							key={index}
+							left={candle.position}
+							bottom={candle.bottom}
+						>
+							<S.CandleCircle
+								top={candle.circleTop}
+								left={candle.circleLeft}
+								src={matchedCandle?.imgUrl || candle.circleBody}
+								alt={`Candle ${index}`}
+								style={{ objectFit: "cover" }}
+							/>
+							<S.CandleBody
+								src={candle.candleBody}
+								alt={`촛대 ${index + 1}`}
+								height={candle.height}
+							/>
+						</S.CandleContainer>
+					);
+				})}
+			</S.CakeContainer>
+
 			<S.CakeInfo>
 				<S.LikedText>
 					<img
