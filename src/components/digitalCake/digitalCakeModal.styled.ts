@@ -14,6 +14,9 @@ export const DigitalModalImgContainer = styled.div`
   img {
     cursor: pointer;
     object-fit: cover;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
   }
 `;
 

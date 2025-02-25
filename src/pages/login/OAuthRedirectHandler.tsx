@@ -30,6 +30,7 @@ const OAuthRedirectHandler = () => {
       localStorage.setItem("refreshToken", loginToken.refreshToken);
 
       navigate("/intro");
+      window.location.reload();
     }
   }, [loginToken, navigate]);
 

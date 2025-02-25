@@ -6,13 +6,11 @@ import DigitalCakeModalNoContent from "@components/digitalCake/digitalCakeModalN
 import { colorToCakeImage } from "@constants/cakeColorConstants";
 import { candleData } from "@constants/candleData";
 import { handleShare } from "@hooks/handleShare";
-import DigitalCakeModalContent from "@components/digitalCake/digitalCakeModal";
 
 const DigitalCake = () => {
   const [cakeData, setCakeData] = useState<CakeData | null>(null);
   const [modalOpen, setModalOpen] = useState<number | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [isMatchedCandle, setIsMatchedCandle] = useState<boolean>(true);
 
   useEffect(() => {
     if (!modalIsOpen) {
@@ -26,10 +24,6 @@ const DigitalCake = () => {
   }, [modalIsOpen]);
 
   const handleCircleClick = (index: number) => {
-    const matchedCandle = cakeData?.candles?.find(
-      (candle) => candle.candleIndex === index
-    );
-    setIsMatchedCandle(!!matchedCandle);
     setModalOpen(index);
     setModalIsOpen(true);
   };
@@ -75,32 +69,23 @@ const DigitalCake = () => {
             );
           })}
 
-        {/* 모달 */}
+        {/* Modal for Candle Content */}
         {modalOpen !== null && modalIsOpen && cakeData && (
-          <>
-            {isMatchedCandle ? (
-              <DigitalCakeModalContent
-                isOpen={modalIsOpen}
-                onClose={() => setModalIsOpen(false)}
-                imgUrl={
-                  cakeData.candles.find(
-                    (candle) => candle.candleIndex === modalOpen
-                  )?.imgUrl || ""
-                }
-                content={
-                  cakeData.candles.find(
-                    (candle) => candle.candleIndex === modalOpen
-                  )?.content || ""
-                }
-              />
-            ) : (
-              <DigitalCakeModalNoContent
-                isOpen={modalIsOpen}
-                onClose={() => setModalIsOpen(false)}
-                candleIndex={modalOpen}
-              />
-            )}
-          </>
+          <DigitalCakeModalNoContent
+            isOpen={modalIsOpen}
+            onClose={() => setModalIsOpen(false)}
+            candleIndex={modalOpen}
+            existingImage={
+              cakeData.candles.find(
+                (candle) => candle.candleIndex === modalOpen
+              )?.imgUrl || ""
+            }
+            existingContent={
+              cakeData.candles.find(
+                (candle) => candle.candleIndex === modalOpen
+              )?.content || ""
+            }
+          />
         )}
       </S.DigitalCakeContainer>
 
