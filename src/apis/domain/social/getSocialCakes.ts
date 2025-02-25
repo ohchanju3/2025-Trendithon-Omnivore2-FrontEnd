@@ -1,7 +1,7 @@
 import { getResponse } from "@apis/instance";
 
 export const getSocialCakes = async (
-	page: number = 1,
+	page: number = 0,
 	size: number = 10,
 ): Promise<string[] | null> => {
 	const response = await getResponse<{

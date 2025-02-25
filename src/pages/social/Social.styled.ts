@@ -25,3 +25,11 @@ export const CupCakeWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 `;
+
+export const NoDataMessage = styled.div`
+	height: 80vh;
+	display: flex;
+	flex-direction: col;
+	justify-content: center;
+	align-items: center;
+`;

@@ -52,15 +52,33 @@ export const Social = () => {
 			<S.Content>
 				{selectedTap === val1 ? (
 					<S.CakeWrapper>
-						{socialCakeData.map((data, index) => (
-							<SocialCake key={index} liked={false} likedNum={0} owner={data} />
-						))}
+						{socialCakeData.length > 0 ? (
+							socialCakeData.map((data, index) => (
+								<SocialCake
+									key={index}
+									liked={false}
+									likedNum={0}
+									owner={data}
+								/>
+							))
+						) : (
+							<S.NoDataMessage>데이터가 존재하지 않습니다.</S.NoDataMessage>
+						)}
 					</S.CakeWrapper>
 				) : (
 					<S.CupCakeWrapper>
-						{socialCupcakeData.map((data, index) => (
-							<SocialCake key={index} liked={false} likedNum={0} owner={data} />
-						))}
+						{socialCupcakeData.length > 0 ? (
+							socialCupcakeData.map((data, index) => (
+								<SocialCake
+									key={index}
+									liked={false}
+									likedNum={0}
+									owner={data}
+								/>
+							))
+						) : (
+							<S.NoDataMessage>데이터가 존재하지 않습니다.</S.NoDataMessage>
+						)}
 					</S.CupCakeWrapper>
 				)}
 			</S.Content>
