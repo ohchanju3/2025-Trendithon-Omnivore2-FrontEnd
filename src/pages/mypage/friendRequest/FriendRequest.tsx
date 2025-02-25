@@ -11,6 +11,7 @@ export const FriendReqeust = () => {
 
 	const fetchRequestFriends = async () => {
 		const response = await getRequestFriends();
+
 		if (response) {
 			console.log("getRequestFriends API 요청 응답 : ", response);
 			setRequestedData(response);
