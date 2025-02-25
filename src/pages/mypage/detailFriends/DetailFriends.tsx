@@ -4,18 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { FriendsManageForm } from "@components/friends/friendsManageForm/FriendsManageForm.tsx";
 
 export const DetailFriends = () => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	return (
-		<S.DetailFriendsWrapper>
-			<GoDetailBar
-				width="310px"
-				onClick={() => {
-					navigate("/friendrequet");
-				}}
-				text={["친구 요청"]}
-			/>
-			<FriendsManageForm numOfFriends={12} />
-		</S.DetailFriendsWrapper>
-	);
+  return (
+    <S.DetailFriendsWrapper>
+      <GoDetailBar
+        width="310px"
+        onClick={() => {
+          navigate("/friendrequest");
+        }}
+        text={["친구 요청"]}
+      />
+      <FriendsManageForm numOfFriends={12} />
+    </S.DetailFriendsWrapper>
+  );
 };
