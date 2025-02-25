@@ -8,7 +8,7 @@ export const getSocialCakes = async (
 		statusCode: number;
 		message: string;
 		data: string[];
-	}>(`/api/cakes/followers?page=${page}&size=${size}`);
+	}>(`/api/cakes/follow?page=${page}&size=${size}`);
 	if (response && response.data) return response.data;
 	return null;
 };
