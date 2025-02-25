@@ -1,5 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import ScrollToTop from "@hooks/scrollToTop";
 
@@ -10,16 +9,6 @@ const Wrapper = styled.div`
 `;
 
 const RootLayout = () => {
-  const navigate = useNavigate();
-  const accessToken = localStorage.getItem("accessToken");
-  console.log;
-
-  useEffect(() => {
-    if (!accessToken) {
-      navigate("/login", { replace: true });
-    } else navigate("/digitalCake");
-  }, [accessToken, navigate]);
-
   return (
     <Wrapper>
       <ScrollToTop />

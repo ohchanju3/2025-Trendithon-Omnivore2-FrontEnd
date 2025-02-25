@@ -33,6 +33,7 @@ const router = createBrowserRouter([
       {
         element: <ProtectedRoute requireCakeId={true} />,
         children: [
+          { path: "/" },
           { path: "/intro", element: <Intro /> },
           { path: "/question", element: <Question /> },
           { path: "/result", element: <Result /> },
