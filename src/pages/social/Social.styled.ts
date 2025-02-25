@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SocialWrapper = styled.div`
-	margin-top: 2rem;
+	margin-top: 1rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -13,7 +13,7 @@ export const SelectTap = styled.div`
 `;
 
 export const Content = styled.div`
-	margin-top: 1rem;
+	margin-top: 2rem;
 	width: 100%;
 	display: flex;
 	flex-direction: column;

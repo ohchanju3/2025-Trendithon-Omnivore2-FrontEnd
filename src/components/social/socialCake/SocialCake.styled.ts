@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SocialCakeWrapper = styled.div`
 	width: 300px;
-	margin: 2rem;
+	margin: 7rem 1rem;
 	padding-bottom: 2rem;
 	border-bottom: 4px dotted white;
 	display: flex;
@@ -10,6 +10,34 @@ export const SocialCakeWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
+`;
+
+export const CandleContainer = styled.div<{ left: number; bottom: number }>`
+	position: absolute;
+	left: ${({ left }) => left}%;
+	bottom: ${({ bottom }) => bottom}%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+
+export const CakeContainer = styled.div`
+	position: relative;
+`;
+
+export const CandleCircle = styled.img<{ top: number; left: number }>`
+	width: 70px;
+	height: 70px;
+	position: absolute;
+	top: ${({ top }) => top}px;
+	left: ${({ left }) => left}px;
+	cursor: pointer;
+	border-radius: 50%;
+	z-index: 10;
+`;
+
+export const CandleBody = styled.img`
+	scale: 0.3;
 `;
 
 export const CakeInfo = styled.div`

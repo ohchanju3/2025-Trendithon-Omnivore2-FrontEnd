@@ -2,7 +2,10 @@ import { SelectTap } from "@components/selectTap/SelectTap.tsx";
 import * as S from "./Social.styled.ts";
 import { useEffect, useState } from "react";
 import { SocialCake } from "@components/social/socialCake/SocialCake.tsx";
-// import { getSocialCakes } from "@apis/domain/social/getSocialCakes.ts";
+import {
+	CakeData,
+	getSocialCakes,
+} from "@apis/domain/social/getSocialCakes.ts";
 import {
 	getSocialCupcakes,
 	SocialCupcake,
@@ -15,7 +18,7 @@ export const Social = () => {
 	const val1 = `Cakes(${numOfCakes})`;
 	const val2 = "New Cupcakes";
 	const [selectedTap, setSelectedTap] = useState(val1);
-	const [socialCakeData, setSocialCakeData] = useState<string[]>([]);
+	const [socialCakeData, setSocialCakeData] = useState<CakeData[]>([]);
 	const [socialCupcakeData, setSocialCupcakeData] = useState<SocialCupcake[]>(
 		[],
 	);
@@ -25,15 +28,15 @@ export const Social = () => {
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 
 	const fetchSocialCakes = async () => {
-		// const response = await getSocialCakes();
-		// if (response && response.length > 0) {
-		// 	setSocialCakeData(response);
-		// 	setNumOfCakes(response.length);
-		// } else {
-		const dummyCakes = ["사용자A", "사용자B", "사용자C", "사용자D"];
-		setSocialCakeData(dummyCakes);
-		setNumOfCakes(dummyCakes.length);
-		// }
+		const response = await getSocialCakes();
+		if (response && response.length > 0) {
+			setSocialCakeData(response);
+			setNumOfCakes(response.length);
+			console.log(response);
+		} else {
+			setSocialCakeData([]);
+			setNumOfCakes(0);
+		}
 	};
 
 	const fetchSocialCupcakes = async () => {
@@ -41,48 +44,7 @@ export const Social = () => {
 		if (response && response.length > 0) {
 			setSocialCupcakeData(response);
 		} else {
-			setSocialCupcakeData([
-				{
-					cupcakeId: 1,
-					nickname: "사용자1",
-					date: "2025-02-24T12:00:00",
-					accessRange: "PUBLIC",
-					emotion: "happy",
-					content: "임시 내용입니다.",
-					likeCount: 0,
-					like: false,
-				},
-				{
-					cupcakeId: 2,
-					nickname: "사용자2",
-					date: "2025-02-24T10:30:00",
-					accessRange: "FRIEND",
-					emotion: "ANGRY",
-					content: "데이터가 없습니다.",
-					likeCount: 1,
-					like: true,
-				},
-				{
-					cupcakeId: 3,
-					nickname: "사용자3",
-					date: "2025-02-23T09:20:00",
-					accessRange: "FRIEND",
-					emotion: "SAD",
-					content: "테스트용 데이터입니다.",
-					likeCount: 1,
-					like: false,
-				},
-				{
-					cupcakeId: 4,
-					nickname: "사용자4",
-					date: "2025-02-22T08:15:00",
-					accessRange: "PRIVATE",
-					emotion: "HAPPY",
-					content: "샘플 데이터입니다.",
-					likeCount: 3,
-					like: true,
-				},
-			]);
+			setSocialCupcakeData([]);
 		}
 	};
 
@@ -117,10 +79,16 @@ export const Social = () => {
 						{socialCakeData.length > 0 ? (
 							socialCakeData.map((data, index) => (
 								<SocialCake
+									cakeId={data.cakeId.toString()}
 									key={index}
-									liked={false}
-									likedNum={0}
-									owner={data}
+									liked={data.like}
+									likedNum={data.likeCount}
+									owner={data.nickname}
+									candles={data.candles}
+									refreshData={() => {
+										fetchSocialCakes();
+										fetchSocialCupcakes();
+									}}
 								/>
 							))
 						) : (
@@ -138,6 +106,11 @@ export const Social = () => {
 								likedNum={data.likeCount}
 								nickname={data.nickname}
 								onClick={() => handleCupcakeClick(data)}
+								refreshData={() => {
+									fetchSocialCakes();
+									fetchSocialCupcakes();
+								}}
+								cupcakeid={data.cupcakeId.toString()}
 							/>
 						))}
 					</S.CupCakeWrapper>
