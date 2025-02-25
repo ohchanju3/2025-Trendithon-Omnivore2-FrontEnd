@@ -1,6 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import styled from "styled-components";
+import ScrollToTop from "@hooks/scrollToTop";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -21,6 +22,7 @@ const RootLayout = () => {
 
   return (
     <Wrapper>
+      <ScrollToTop />
       <Outlet />
     </Wrapper>
   );

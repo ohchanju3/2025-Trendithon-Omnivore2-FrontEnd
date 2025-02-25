@@ -18,7 +18,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       {accessToken && <SseNotification setHasNotification={() => {}} />}
-      {/* 로그인 후 SSE 연결 */}
       <RouterProvider router={router} />
     </ThemeProvider>
   );
