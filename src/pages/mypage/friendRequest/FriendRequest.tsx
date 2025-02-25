@@ -22,7 +22,12 @@ export const FriendReqeust = () => {
 	return (
 		<S.FriendRequestWrapper>
 			{requestedData.map((data) => (
-				<FriendReqeustBox name={data.name} />
+				<FriendReqeustBox
+					key={data.memberId}
+					name={data.nickname}
+					followerId={data.memberId.toString()}
+					onSuccess={fetchRequestFriends}
+				/>
 			))}
 		</S.FriendRequestWrapper>
 	);
