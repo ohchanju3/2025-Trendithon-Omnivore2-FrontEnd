@@ -8,13 +8,10 @@ import {
 import { useEffect, useState } from "react";
 import { postFriendRequest } from "@apis/domain/mypage/postFriendRequest.ts";
 
-type FriendsManageFormProps = {
-	numOfFriends: number;
-};
-
-export const FriendsManageForm = ({ numOfFriends }: FriendsManageFormProps) => {
+export const FriendsManageForm = () => {
 	const [data, setData] = useState<Follower[]>([]);
 	const [searchEmail, setSearchEmail] = useState("");
+	const [numOfFriends, setNumOfFriends] = useState(0);
 
 	const fetchFriends = async () => {
 		console.log("fetchFriends 실행됨!");
@@ -23,11 +20,13 @@ export const FriendsManageForm = ({ numOfFriends }: FriendsManageFormProps) => {
 
 		if (response) {
 			setData(response);
+			setNumOfFriends(response.length);
 		} else {
 			console.warn("API 응답이 없습니다.");
 		}
 	};
 
+	// 친구 요청 보내기
 	const fetchRequestFriends = async () => {
 		if (!searchEmail.trim()) {
 			alert("이메일을 입력해주세요!");
@@ -39,6 +38,7 @@ export const FriendsManageForm = ({ numOfFriends }: FriendsManageFormProps) => {
 			console.log("postFriendsRequest API 요청 응답 : ", response);
 			alert(response);
 			setSearchEmail("");
+			fetchFriends();
 		} else {
 			alert("친구 요청을 수행할 수 없습니다!");
 		}
@@ -75,6 +75,8 @@ export const FriendsManageForm = ({ numOfFriends }: FriendsManageFormProps) => {
 						key={index}
 						profileImg={ele.profileImage}
 						name={ele.name}
+						memberId={ele.memberId.toString()}
+						onSuccess={fetchFriends}
 					/>
 				))}
 			</S.FriendsList>

@@ -72,11 +72,7 @@ const Mypage = () => {
 				<GoDetailBar
 					width="300px"
 					text={["친구 관리", "|", myData?.followerCount + "명"]}
-					onClick={() =>
-						navigate("/detailfriends", {
-							state: { followerCount: myData?.followerCount },
-						})
-					}
+					onClick={() => navigate("/detailfriends")}
 				/>
 			</S.InfoForm>
 		</S.MyPageWrapper>
