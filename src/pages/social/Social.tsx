@@ -3,7 +3,11 @@ import * as S from "./Social.styled.ts";
 import { useEffect, useState } from "react";
 import { SocialCake } from "@components/social/socialCake/SocialCake.tsx";
 import { getSocialCakes } from "@apis/domain/social/getSocialCakes.ts";
-import { getSocialCupcakes } from "@apis/domain/social/getSocialCupcakes.ts";
+import {
+	getSocialCupcakes,
+	SocialCupcake,
+} from "@apis/domain/social/getSocialCupcakes.ts";
+import { SocialSingleCupcake } from "@components/socialCupcake/SocialSingleCupcake.tsx";
 
 export const Social = () => {
 	const [numOfCakes, setNumOfCakes] = useState(0);
@@ -11,7 +15,9 @@ export const Social = () => {
 	const val2 = "New Cupcakes";
 	const [selectedTap, setSelectedTap] = useState(val1);
 	const [socialCakeData, setSocialCakeData] = useState<string[]>([]);
-	const [socialCupcakeData, setSocialCupcakeData] = useState<string[]>([]);
+	const [socialCupcakeData, setSocialCupcakeData] = useState<SocialCupcake[]>(
+		[],
+	);
 
 	const fetchSocialCakes = async () => {
 		const response = await getSocialCakes();
@@ -69,11 +75,13 @@ export const Social = () => {
 					<S.CupCakeWrapper>
 						{socialCupcakeData.length > 0 ? (
 							socialCupcakeData.map((data, index) => (
-								<SocialCake
+								<SocialSingleCupcake
+									emotion={data.emotion}
+									date={data.date}
 									key={index}
-									liked={false}
-									likedNum={0}
-									owner={data}
+									liked={data.like}
+									likedNum={data.likeCount}
+									nickname={data.nickname}
 								/>
 							))
 						) : (
