@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import SseModal from "@components/modal/SseModal";
 
 interface SseNotificationProps {
   setHasNotification: (value: boolean) => void;
@@ -7,6 +8,10 @@ interface SseNotificationProps {
 const SseNotification: React.FC<SseNotificationProps> = ({
   setHasNotification,
 }) => {
+  const [notificationMessage, setNotificationMessage] = useState<string | null>(
+    null
+  );
+  const [showModal, setShowModal] = useState(false);
   const readerRef = useRef<ReadableStreamDefaultReader | null>(null);
   const TOKEN = localStorage.getItem("accessToken");
 
@@ -65,17 +70,19 @@ const SseNotification: React.FC<SseNotificationProps> = ({
           // 알림이 도착하면 상태 업데이트
           setHasNotification(true);
 
-          // 정규식으로 cakeId 값 추출
-          const match = text.match(/cakeId (\d+)/);
+          // 정규식으로 알림 내용에서 name: 뒤의 텍스트만 추출
+          const match = text.match(/name: (.*)/);
           if (match) {
-            const cakeId = match[1];
+            const extractedMessage = match[1]; // data:name: 이후의 텍스트
+            setNotificationMessage(extractedMessage);
 
-            const prevCakeId = localStorage.getItem("cakeId");
+            // 모달 띄우기
+            setShowModal(true);
 
-            if (prevCakeId !== cakeId) {
-              localStorage.setItem("cakeId", cakeId);
-              window.location.reload();
-            }
+            // 5초 후에 모달을 닫기
+            setTimeout(() => {
+              setShowModal(false);
+            }, 10000);
           }
         }
       } catch (error) {
@@ -89,7 +96,23 @@ const SseNotification: React.FC<SseNotificationProps> = ({
     attemptConnection();
   };
 
-  return null;
+  // 친구 요청 페이지로 이동하는 함수
+  const goToFriendRequestPage = () => {
+    // 친구 요청 페이지로 이동하는 로직 추가 (예: react-router 사용)
+    window.location.href = "/friendrequest";
+  };
+
+  return (
+    <>
+      {showModal && (
+        <SseModal
+          message={notificationMessage}
+          onClose={() => setShowModal(false)}
+          onGoToFriendRequest={goToFriendRequestPage}
+        />
+      )}
+    </>
+  );
 };
 
 export default SseNotification;
