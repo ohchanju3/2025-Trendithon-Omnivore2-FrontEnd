@@ -16,6 +16,7 @@ import { DetailFriends } from "@pages/mypage/detailFriends/DetailFriends";
 import { Social } from "@pages/social/Social";
 import SseTest from "@pages/test/SseTest";
 import { FriendReqeust } from "@pages/mypage/friendRequest/FriendRequest";
+import SocialCakePage from "@pages/social/SocialCakePage";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
         element: <OAuthRedirectHandler />,
       },
 
-      // cakeId 없는 사람만 /intro, /result 접근 가능
+      // cakeId 없는 사람만 /intro, /result 페이지 접근 가능
       {
         element: <ProtectedRoute requireCakeId={true} />,
         children: [
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           {
-            element: <DefaultLayout />, // ✅ DefaultLayout을 적용
+            element: <DefaultLayout />,
             children: [
               { path: "mypage", element: <Mypage /> },
               { path: "detailfriends", element: <DetailFriends /> },
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
               { path: "digitalCake", element: <DigitalCake /> },
               { path: "dailyCake", element: <DailyCake /> },
               { path: "social", element: <Social /> },
+              { path: "socialCake", element: <SocialCakePage /> },
               { path: "test", element: <SseTest /> },
             ],
           },
