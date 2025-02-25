@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FriendsManageForm } from "@components/friends/friendsManageForm/FriendsManageForm.tsx";
 
 export const DetailFriends = () => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
 	return (
 		<S.DetailFriendsWrapper>
