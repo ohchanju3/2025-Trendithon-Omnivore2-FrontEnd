@@ -40,30 +40,30 @@ export const Social = () => {
     }
   };
 
-	const fetchSocialCupcakes = async (): Promise<SocialCupcake[]> => {
-		const response = await getSocialCupcakes();
-		if (response && response.length > 0) {
-			setSocialCupcakeData(response);
-			return response;
-		} else {
-			setSocialCupcakeData([]);
-			return [];
-		}
-	};
+  const fetchSocialCupcakes = async (): Promise<SocialCupcake[]> => {
+    const response = await getSocialCupcakes();
+    if (response && response.length > 0) {
+      setSocialCupcakeData(response);
+      return response;
+    } else {
+      setSocialCupcakeData([]);
+      return [];
+    }
+  };
 
-	const handleLikeBtn = async (cupcakeId: string) => {
-		await postLikeCupcake(cupcakeId);
-		await fetchSocialCakes();
-		const updatedCupcakes = await fetchSocialCupcakes();
-		if (selectedCupcake) {
-			const updatedCupcake = updatedCupcakes.find(
-				(cupcake) => cupcake.cupcakeId.toString() === cupcakeId,
-			);
-			if (updatedCupcake) {
-				setSelectedCupcake(updatedCupcake);
-			}
-		}
-	};
+  const handleLikeBtn = async (cupcakeId: string) => {
+    await postLikeCupcake(cupcakeId);
+    await fetchSocialCakes();
+    const updatedCupcakes = await fetchSocialCupcakes();
+    if (selectedCupcake) {
+      const updatedCupcake = updatedCupcakes.find(
+        (cupcake) => cupcake.cupcakeId.toString() === cupcakeId
+      );
+      if (updatedCupcake) {
+        setSelectedCupcake(updatedCupcake);
+      }
+    }
+  };
 
   const handleCupcakeClick = (data: SocialCupcake) => {
     setSelectedCupcake(data);
@@ -135,31 +135,38 @@ export const Social = () => {
         )}
       </S.Content>
 
-			<Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}>
-				<S.ContentWrapper>
-					<S.DayWrapper>
-						{selectedCupcake
-							? new Date(selectedCupcake.date).toLocaleDateString()
-							: ""}
-					</S.DayWrapper>
-					<S.TextArea
-						$emotion={selectedCupcake?.emotion.toLowerCase() || "default"}
-					>
-						{selectedCupcake?.content || ""}
-					</S.TextArea>
-					<S.LikeButton
-						onClick={() => {
-							const cupcakeId = selectedCupcake?.cupcakeId;
-							handleLikeBtn(cupcakeId?.toString() ?? "");
-						}}
-					>
-						<img src="/images/likeBtn/heart.png" alt="heart" />
-						<span>{selectedCupcake?.likeCount || 0}</span>
-					</S.LikeButton>
-				</S.ContentWrapper>
-			</Modal>
-		</S.SocialWrapper>
-	);
+      <Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}>
+        <S.ContentWrapper>
+          <S.DayWrapper>
+            {selectedCupcake
+              ? new Date(selectedCupcake.date).toLocaleDateString()
+              : ""}
+          </S.DayWrapper>
+          <S.TextArea
+            $emotion={selectedCupcake?.emotion.toLowerCase() || "default"}
+          >
+            {selectedCupcake?.content || ""}
+          </S.TextArea>
+          <S.LikeButton
+            onClick={() => {
+              const cupcakeId = selectedCupcake?.cupcakeId;
+              handleLikeBtn(cupcakeId?.toString() ?? "");
+            }}
+          >
+            <img
+              src={
+                selectedCupcake?.like
+                  ? "/images/shareBtn/likeBtn.png"
+                  : "/images/shareBtn/unlikeBtn.png"
+              }
+              alt="like button"
+            />
+            <span>{selectedCupcake?.likeCount || 0}</span>
+          </S.LikeButton>
+        </S.ContentWrapper>
+      </Modal>
+    </S.SocialWrapper>
+  );
 };
 
 export default Social;

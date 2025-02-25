@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         element: <OAuthRedirectHandler />,
       },
 
-      // cakeId 없는 사람만 /intro, /result 페이지 접근 가능
+      // cakeId 없는 사람만 /intro, /result 접근 가능
       {
         element: <ProtectedRoute requireCakeId={true} />,
         children: [
