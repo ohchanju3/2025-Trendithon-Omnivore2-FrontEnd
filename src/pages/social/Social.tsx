@@ -2,7 +2,7 @@ import { SelectTap } from "@components/selectTap/SelectTap.tsx";
 import * as S from "./Social.styled.ts";
 import { useEffect, useState } from "react";
 import { SocialCake } from "@components/social/socialCake/SocialCake.tsx";
-import { getSocialCakes } from "@apis/domain/social/getSocialCakes.ts";
+// import { getSocialCakes } from "@apis/domain/social/getSocialCakes.ts";
 import {
 	getSocialCupcakes,
 	SocialCupcake,
@@ -25,15 +25,15 @@ export const Social = () => {
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 
 	const fetchSocialCakes = async () => {
-		const response = await getSocialCakes();
-		if (response && response.length > 0) {
-			setSocialCakeData(response);
-			setNumOfCakes(response.length);
-		} else {
-			const dummyCakes = ["사용자A", "사용자B", "사용자C", "사용자D"];
-			setSocialCakeData(dummyCakes);
-			setNumOfCakes(dummyCakes.length);
-		}
+		// const response = await getSocialCakes();
+		// if (response && response.length > 0) {
+		// 	setSocialCakeData(response);
+		// 	setNumOfCakes(response.length);
+		// } else {
+		const dummyCakes = ["사용자A", "사용자B", "사용자C", "사용자D"];
+		setSocialCakeData(dummyCakes);
+		setNumOfCakes(dummyCakes.length);
+		// }
 	};
 
 	const fetchSocialCupcakes = async () => {
