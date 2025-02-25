@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import Spinner from "@components/spinner/Spinner";
 
 interface LoginToken {
   accessToken: string;
@@ -57,7 +58,7 @@ const OAuthRedirectHandler = () => {
     }
   };
   //Todo: 로딩 컴포넌트 생성
-  return <div>로딩 중</div>;
+  return <Spinner />;
 };
 
 export default OAuthRedirectHandler;
