@@ -66,23 +66,26 @@ const SseNotification: React.FC<SseNotificationProps> = ({
 
           const text = decoder.decode(value, { stream: true }).trim();
           console.log("📩 [MESSAGE] 새 알림 도착:", text);
-
-          // 알림이 도착하면 상태 업데이트
           setHasNotification(true);
 
-          // 정규식으로 알림 내용에서 name: 뒤의 텍스트만 추출
-          const match = text.match(/name: (.*)/);
-          if (match) {
-            const extractedMessage = match[1]; // data:name: 이후의 텍스트
-            setNotificationMessage(extractedMessage);
+          if (text.includes("님이")) {
+            const match = text.match(/data:\s*(.*)/);
+            if (match) {
+              const dataContent = match[1];
+              setNotificationMessage(dataContent);
+              setShowModal(true);
+            }
+          }
 
-            // 모달 띄우기
-            setShowModal(true);
+          const cakeIdMatch = text.match(/cakeId\s*(\d+)/);
+          if (cakeIdMatch) {
+            const cakeId = cakeIdMatch[1];
+            const prevCakeId = localStorage.getItem("cakeId");
 
-            // 5초 후에 모달을 닫기
-            setTimeout(() => {
-              setShowModal(false);
-            }, 10000);
+            if (prevCakeId !== cakeId) {
+              localStorage.setItem("cakeId", cakeId);
+              console.log(`🔄 새로운 cakeId (${cakeId}) 저장 완료`);
+            }
           }
         }
       } catch (error) {
@@ -96,9 +99,7 @@ const SseNotification: React.FC<SseNotificationProps> = ({
     attemptConnection();
   };
 
-  // 친구 요청 페이지로 이동하는 함수
   const goToFriendRequestPage = () => {
-    // 친구 요청 페이지로 이동하는 로직 추가 (예: react-router 사용)
     window.location.href = "/friendrequest";
   };
 

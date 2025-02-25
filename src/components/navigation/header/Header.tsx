@@ -1,10 +1,19 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./Header.styled";
+import { fetchFriendRequestsAtom } from "@atoms/friendRequestAtom";
+import { useAtom } from "jotai";
 
 const Header = () => {
   const navigate = useNavigate();
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [requestedData, fetchRequestFriends] = useAtom(fetchFriendRequestsAtom);
+
+  useEffect(() => {
+    fetchRequestFriends();
+  }, []);
+
+  const hasFriendRequests = requestedData.length > 0;
 
   const handleLeftLogoClick = () => {
     navigate("/mypage");
@@ -38,7 +47,7 @@ const Header = () => {
           src="/images/header/HeaderLogoRight.png"
           onClick={handleRightLogoClick}
         />
-        {<S.NotificationDot />} {/* 알림 상태에 따라 표시 */}
+        {hasFriendRequests && <S.NotificationDot />}
       </S.HeaderContainer>
 
       {isNavOpen && <S.Overlay onClick={handleRightLogoClick} />}
