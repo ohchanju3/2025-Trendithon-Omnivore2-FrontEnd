@@ -13,7 +13,7 @@ export const SelectTap = styled.div`
 `;
 
 export const Content = styled.div`
-	margin-top: 2rem;
+	margin-top: 4rem;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
