@@ -38,8 +38,8 @@ export const SocialSingleCupcake = ({
 					<img
 						src={
 							liked
-								? "/images/likeBtn/heart-filled.png"
-								: "/images/likeBtn/heart.png"
+								? "/images/shareBtn/likeBtn.png"
+								: "/images/shareBtn/unlikeBtn.png"
 						}
 						alt="like-icon"
 					/>
