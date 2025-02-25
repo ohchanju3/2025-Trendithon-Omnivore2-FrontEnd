@@ -67,6 +67,7 @@ const Mypage = () => {
 							prev ? { ...prev, nickName: e.target.value } : prev,
 						)
 					}
+					readOnly={true}
 				/>
 
 				<GoDetailBar

@@ -7,6 +7,7 @@ type InputBarProps = {
 	title: string;
 	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 	children?: ReactNode;
+	readOnly?: boolean;
 };
 
 export const InputBar = ({
@@ -15,6 +16,7 @@ export const InputBar = ({
 	title,
 	onChange,
 	children,
+	readOnly,
 }: InputBarProps) => {
 	return (
 		<S.InputBarWrapper width={width}>
@@ -27,6 +29,7 @@ export const InputBar = ({
 				id="inputbox"
 				value={value}
 				onChange={onChange}
+				readOnly={readOnly}
 			/>
 
 			{children}
