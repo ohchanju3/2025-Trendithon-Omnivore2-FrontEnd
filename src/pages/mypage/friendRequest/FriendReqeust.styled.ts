@@ -8,3 +8,11 @@ export const FriendRequestWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 `;
+
+export const NoRequestMessage = styled.div`
+	height: 100vh;
+	display: flex;
+	flex-direction: col;
+	justify-content: center;
+	align-items: center;
+`;

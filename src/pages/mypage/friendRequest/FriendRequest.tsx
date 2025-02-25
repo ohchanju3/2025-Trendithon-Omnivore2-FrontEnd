@@ -1,24 +1,43 @@
 import { FriendReqeustBox } from "@components/friends/friendsRequestBox/FriendsRequestBox.tsx";
 import * as S from "./FriendReqeust.styled.ts";
+import { useEffect, useState } from "react";
+import {
+	FollowerWithId,
+	getRequestFriends,
+} from "@apis/domain/mypage/getRequestFriends.ts";
 
 export const FriendReqeust = () => {
-	const dummyData = [
-		{
-			name: "gildonggii",
-		},
-		{
-			name: "홍길동",
-		},
-		{
-			name: "고길동",
-		},
-	];
+	const [requestedData, setRequestedData] = useState<FollowerWithId[]>([]);
+
+	const fetchRequestFriends = async () => {
+		const response = await getRequestFriends();
+
+		if (response) {
+			console.log("getRequestFriends API 요청 응답 : ", response);
+			setRequestedData(response);
+		} else {
+			setRequestedData([]);
+		}
+	};
+
+	useEffect(() => {
+		fetchRequestFriends();
+	}, []);
 
 	return (
 		<S.FriendRequestWrapper>
-			{dummyData.map((data) => (
-				<FriendReqeustBox name={data.name} />
-			))}
+			{requestedData.length > 0 ? (
+				requestedData.map((data) => (
+					<FriendReqeustBox
+						key={data.memberId}
+						name={data.nickname}
+						followerId={data.followId.toString()}
+						onSuccess={fetchRequestFriends}
+					/>
+				))
+			) : (
+				<S.NoRequestMessage>요청 내역이 없습니다.</S.NoRequestMessage>
+			)}
 		</S.FriendRequestWrapper>
 	);
 };
