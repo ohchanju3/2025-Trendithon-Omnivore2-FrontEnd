@@ -12,6 +12,8 @@ export const FriendReqeust = () => {
 		if (response) {
 			console.log("getRequestFriends API 요청 응답 : ", response);
 			setRequestedData(response);
+		} else {
+			setRequestedData([]);
 		}
 	};
 
@@ -21,14 +23,18 @@ export const FriendReqeust = () => {
 
 	return (
 		<S.FriendRequestWrapper>
-			{requestedData.map((data) => (
-				<FriendReqeustBox
-					key={data.memberId}
-					name={data.nickname}
-					followerId={data.memberId.toString()}
-					onSuccess={fetchRequestFriends}
-				/>
-			))}
+			{requestedData.length > 0 ? (
+				requestedData.map((data) => (
+					<FriendReqeustBox
+						key={data.memberId}
+						name={data.nickname}
+						followerId={data.memberId.toString()}
+						onSuccess={fetchRequestFriends}
+					/>
+				))
+			) : (
+				<S.NoRequestMessage>요청 내역이 없습니다.</S.NoRequestMessage>
+			)}
 		</S.FriendRequestWrapper>
 	);
 };
