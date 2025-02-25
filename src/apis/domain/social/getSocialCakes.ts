@@ -1,14 +1,14 @@
 import { getResponse } from "@apis/instance";
 
 export const getSocialCakes = async (
-	page: number = 1,
+	page: number = 0,
 	size: number = 10,
 ): Promise<string[] | null> => {
 	const response = await getResponse<{
 		statusCode: number;
 		message: string;
 		data: string[];
-	}>(`/api/cakes/followers?page=${page}&size=${size}`);
+	}>(`/api/cakes/follow?page=${page}&size=${size}`);
 	if (response && response.data) return response.data;
 	return null;
 };
