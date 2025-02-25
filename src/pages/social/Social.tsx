@@ -79,11 +79,16 @@ export const Social = () => {
 						{socialCakeData.length > 0 ? (
 							socialCakeData.map((data, index) => (
 								<SocialCake
+									cakeId={data.cakeId.toString()}
 									key={index}
-									liked={false}
-									likedNum={0}
+									liked={data.like}
+									likedNum={data.likeCount}
 									owner={data.nickname}
 									candles={data.candles}
+									refreshData={() => {
+										fetchSocialCakes();
+										fetchSocialCupcakes();
+									}}
 								/>
 							))
 						) : (
@@ -101,6 +106,11 @@ export const Social = () => {
 								likedNum={data.likeCount}
 								nickname={data.nickname}
 								onClick={() => handleCupcakeClick(data)}
+								refreshData={() => {
+									fetchSocialCakes();
+									fetchSocialCupcakes();
+								}}
+								cupcakeid={data.cupcakeId.toString()}
 							/>
 						))}
 					</S.CupCakeWrapper>

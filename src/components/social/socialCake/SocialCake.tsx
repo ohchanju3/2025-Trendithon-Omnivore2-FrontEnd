@@ -1,3 +1,4 @@
+import { postLikeCake } from "@apis/domain/cake/postLikeCake.ts";
 import * as S from "./SocialCake.styled.ts";
 import { candleData } from "@constants/candleData";
 
@@ -9,18 +10,29 @@ type Candle = {
 };
 
 type SocialCakeProps = {
+	cakeId: string;
 	liked: boolean;
 	likedNum: number;
 	owner: string;
 	candles?: Candle[];
+	refreshData: () => void;
 };
 
 export const SocialCake = ({
+	cakeId,
 	liked,
 	likedNum,
 	owner,
 	candles = [],
+	refreshData,
 }: SocialCakeProps) => {
+	const handleLikeBtn = async (
+		e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+	) => {
+		e.stopPropagation();
+		await postLikeCake(cakeId);
+		refreshData();
+	};
 	return (
 		<S.SocialCakeWrapper>
 			<S.CakeContainer>
@@ -53,7 +65,7 @@ export const SocialCake = ({
 			</S.CakeContainer>
 
 			<S.CakeInfo>
-				<S.LikedText>
+				<S.LikedText onClick={handleLikeBtn}>
 					<img
 						src={
 							liked
