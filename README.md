@@ -75,7 +75,5 @@
 
 | 오찬주 | 이민우 |
 |:------:|:------:|
-| ![image](https://github.com/user-attachments/assets/41117a39-1ace-469e-a635-c90e87e7f7f9)
- |![image](https://github.com/user-attachments/assets/ce838782-4fa9-416c-9b04-c6b9c811bc61)
- |
+| ![오찬주 이미지](https://github.com/user-attachments/assets/41117a39-1ace-469e-a635-c90e87e7f7f9) | ![이민우 이미지](https://github.com/user-attachments/assets/ce838782-4fa9-416c-9b04-c6b9c811bc61) |
 | [오찬주](https://github.com/coldweek3) | [이민우](https://github.com/minwoo1119) |
