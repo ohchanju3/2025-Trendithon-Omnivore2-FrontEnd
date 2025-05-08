@@ -59,7 +59,7 @@ export const CalendarForm = () => {
 				onChange={setSelectedDate}
 				value={selectedDate}
 				onClickDay={handleDateClick}
-				locale="ko-KR"
+				locale="en-US"
 				formatMonthYear={(locale, date) =>
 					`${date.getFullYear()} ${date.toLocaleString(locale, {
 						month: "long",
